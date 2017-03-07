@@ -7,27 +7,32 @@
 <script>
     import ChessBoard from 'chessboardjs';
     import chess from 'chess.js';
-    var board;
-    var game = new chess('rn5k/pp1r2pp/2p1Q2B/8/8/2N3K1/PPP2PP1/R4R2 w – – 1 19');
+    
     export default {
         data() {
-            return {                
+            return {
+                game: new chess(),
+                currentKata: {
+                    fen: 'rn5k/pp1r2pp/2p1Q2B/8/8/2N3K1/PPP2PP1/R4R2 w - - 1 19',
+                    currentMove: 0,
+                    userMoves: ['Qe8#'],
+                    computerMoves: []
+                }
             }
         },
-        mounted(){
-            // do not pick up pieces if the game is over
-            // only pick up pieces for the side to move
-            var onDragStart = function(source, piece, position, orientation) {
-                if (game.game_over() === true ||
-                    (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
-                    (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+        methods: {
+            onDragStart(source, piece, position, orientation) {
+                // do not pick up pieces if the game is over
+                // only pick up pieces for the side to move
+                if (this.game.game_over() === true ||
+                    (this.game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+                    (this.game.turn() === 'b' && piece.search(/^w/) !== -1)) {
                     return false;
                 }
-            };
-
-            var onDrop = function(source, target) {
+            },
+            onDrop(source, target) {
                 // see if the move is legal
-                var move = game.move({
+                var move = this.game.move({
                     from: source,
                     to: target,
                     promotion: 'q' // NOTE: always promote to a queen for example simplicity
@@ -35,31 +40,33 @@
 
                 // illegal move
                 if (move === null) return 'snapback';
+                
+                if(move.san !== this.currentKata.userMoves[this.currentKata.currentMove]){
+                    this.game.undo();
+                }
 
-                updateStatus();
-            };
-
-            // update the board position after the piece snap 
-            // for castling, en passant, pawn promotion
-            var onSnapEnd = function() {
-                board.position(game.fen());
-            };
-
-            var updateStatus = function() {
+                this.updateStatus();
+            },
+            onSnapEnd() {
+                // update the board position after the piece snap 
+                // for castling, en passant, pawn promotion
+                this.board.position(this.game.fen());
+            },
+            updateStatus() {
                 var status = '';
 
                 var moveColor = 'White';
-                if (game.turn() === 'b') {
+                if (this.game.turn() === 'b') {
                     moveColor = 'Black';
                 }
 
                 // checkmate?
-                if (game.in_checkmate() === true) {
+                if (this.game.in_checkmate() === true) {
                     status = 'Game over, ' + moveColor + ' is in checkmate.';
                 }
 
                 // draw?
-                else if (game.in_draw() === true) {
+                else if (this.game.in_draw() === true) {
                     status = 'Game over, drawn position';
                 }
 
@@ -68,26 +75,28 @@
                     status = moveColor + ' to move';
 
                     // check?
-                    if (game.in_check() === true) {
-                    status += ', ' + moveColor + ' is in check';
+                    if (this.game.in_check() === true) {
+                        status += ', ' + moveColor + ' is in check';
                     }
                 }
 
                 console.log(status);
-                /*fenEl.html(game.fen());
-                pgnEl.html(game.pgn());*/
-            };
-
+                /*fenEl.html(this.game.fen());
+                pgnEl.html(this.game.pgn());*/
+            }
+        },
+        mounted(){
             var cfg = {
                 draggable: true,
-                position: 'rn5k/pp1r2pp/2p1Q2B/8/8/2N3K1/PPP2PP1/R4R2 w – – 1 19',
-                onDragStart: onDragStart,
-                onDrop: onDrop,
-                onSnapEnd: onSnapEnd
+                position: this.currentKata.fen,
+                onDragStart: this.onDragStart,
+                onDrop: this.onDrop,
+                onSnapEnd: this.onSnapEnd
             };
-            board = ChessBoard('board', cfg);
+            this.board = ChessBoard('board', cfg);
+            this.game.load(this.currentKata.fen);
 
-            updateStatus();
+            this.updateStatus();
         }
     }
 
