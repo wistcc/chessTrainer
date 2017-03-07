@@ -1,9 +1,12 @@
 <template>
     <div class="container">
-        <div class="row">
-            <h1>Turn: {{turn}}</h1>
+        <div class="row" v-if="description">
+            <h1>{{description}}</h1>
         </div>
         <div class="row">
+            <h1>Status: {{status}}</h1>
+        </div>
+        <div class="row" v-if="pgn">
             <h1>PGN</h1>
             <span>{{pgn}}</span>
         </div>
@@ -12,6 +15,6 @@
 
 <script>
     export default {
-        props: ['turn', 'pgn'],
+        props: ['status', 'pgn', 'description'],
     }
 </script>

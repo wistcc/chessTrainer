@@ -1,23 +1,34 @@
 <template>
     <div>
+        <notification :message="message"></notification>
         <div id="board" style="width: 400px"></div>
+        <historyTable :status="status" :description="currentKata.description"></historyTable>
     </div>
 </template>
 
 <script>
+    import historyTable from 'components/historyTable';
+    import notification from 'components/notification';
     import ChessBoard from 'chessboardjs';
     import chess from 'chess.js';
     
     export default {
+        components: {
+            historyTable,
+            notification
+        },
         data() {
             return {
                 game: new chess(),
                 currentKata: {
+                    description: "Black mates in 4",
                     fen: '6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1',
                     currentMove: 0,
                     userMoves: ['Qe5', 'Rh2+', 'Qxg3#'],
                     computerMoves: ['g3', 'Kg1']
-                }
+                },
+                status: '',
+                message: ''
             }
         },
         methods: {
@@ -76,11 +87,13 @@
                 // checkmate?
                 if (this.game.in_checkmate() === true) {
                     status = 'Game over, ' + moveColor + ' is in checkmate.';
+                    this.message = status;
                 }
 
                 // draw?
                 else if (this.game.in_draw() === true) {
                     status = 'Game over, drawn position';
+                    this.message = status;
                 }
 
                 // game still on
@@ -90,12 +103,11 @@
                     // check?
                     if (this.game.in_check() === true) {
                         status += ', ' + moveColor + ' is in check';
+                        this.message = status;
                     }
                 }
 
-                console.log(status);
-                /*fenEl.html(this.game.fen());
-                pgnEl.html(this.game.pgn());*/
+                this.status = status;
             }
         },
         mounted(){
