@@ -1,7 +1,6 @@
 <template>
     <div>
-        <h1>Kata for {{level}}</h1>
-        <notification :message="message"></notification>
+        <h1>Kata {{kataNumber + 1}}/{{kataTotal}} for {{level}}</h1>
         <div id="board" style="width: 400px"></div>
         <historyTable :status="status" :description="currentKata.description"></historyTable>
     </div>
@@ -9,24 +8,22 @@
 
 <script>
     import historyTable from 'components/historyTable';
-    import notification from 'components/notification';
     import katas from 'data/katas';
     import ChessBoard from 'chessboardjs';
     import chess from 'chess.js';
     
     export default {
         components: {
-            historyTable,
-            notification
+            historyTable
         },
         data() {
             return {
                 game: new chess(),
                 currentKata: {},
                 status: '',
-                message: '',
-                level: this.$route.query.level,
-                kataNumber: this.$route.query.kataNumber || 0
+                level: this.$route.params.level,
+                kataNumber: parseInt(this.$route.params.kataNumber) || 0,
+                kataTotal: 0
             }
         },
         methods: {
@@ -85,13 +82,11 @@
                 // checkmate?
                 if (this.game.in_checkmate() === true) {
                     status = 'Game over, ' + moveColor + ' is in checkmate.';
-                    this.message = status;
                 }
 
                 // draw?
                 else if (this.game.in_draw() === true) {
                     status = 'Game over, drawn position';
-                    this.message = status;
                 }
 
                 // game still on
@@ -101,26 +96,30 @@
                     // check?
                     if (this.game.in_check() === true) {
                         status += ', ' + moveColor + ' is in check';
-                        this.message = status;
                     }
                 }
 
                 this.status = status;
+            },
+            loadBoard(){
+                var cfg = {
+                    draggable: true,
+                    position: this.currentKata.fen,
+                    onDragStart: this.onDragStart,
+                    onDrop: this.onDrop,
+                    onSnapEnd: this.onSnapEnd
+                };
+
+                this.board = ChessBoard('board', cfg);
+                this.game.load(this.currentKata.fen);
             }
         },
-        mounted(){            
-            this.currentKata = katas[this.$route.query.level][this.kataNumber];
-
-            var cfg = {
-                draggable: true,
-                position: this.currentKata.fen,
-                onDragStart: this.onDragStart,
-                onDrop: this.onDrop,
-                onSnapEnd: this.onSnapEnd
-            };
-
-            this.board = ChessBoard('board', cfg);
-            this.game.load(this.currentKata.fen);
+        created(){
+            this.currentKata = katas[this.$route.params.level][this.kataNumber];
+            this.kataTotal = katas[this.$route.params.level].length;
+        },
+        mounted(){
+            this.loadBoard();
             this.updateStatus();
         }
     }

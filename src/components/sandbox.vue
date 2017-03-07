@@ -1,6 +1,5 @@
 <template>
     <div>
-        <notification :message="message"></notification>
         <div id="board" style="width: 400px"></div>
         <historyTable :status="status" :pgn="pgn"></historyTable>
     </div>
@@ -8,7 +7,6 @@
 
 <script>
     import historyTable from 'components/historyTable';
-    import notification from 'components/notification';
     import ChessBoard from 'chessboardjs';
     import chess from 'chess.js';
     
@@ -20,8 +18,7 @@
             return {
                 game: new chess(),
                 status: '',
-                pgn: '',
-                message: ''
+                pgn: ''
             }
         },
         methods: {
@@ -63,13 +60,11 @@
                 // checkmate?
                 if (this.game.in_checkmate() === true) {
                     status = 'Game over, ' + moveColor + ' is in checkmate.';
-                    this.message = status;
                 }
 
                 // draw?
                 else if (this.game.in_draw() === true) {
                     status = 'Game over, drawn position';
-                    this.message = status;
                 }
 
                 // game still on
@@ -78,9 +73,7 @@
 
                     // check?
                     if (this.game.in_check() === true) {
-                        var msg = ', ' + moveColor + ' is in check';
-                        this.message = msg;
-                        status += msg;
+                        status += ', ' + moveColor + ' is in check';
                     }
                 }
 

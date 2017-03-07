@@ -8,17 +8,25 @@
                     <div id="beginnerBoard" style="width: 250px"></div>
                 </router-link>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" v-if="chessTrainer.level['intermediate'] > 0">
                 <h3>Intermediate</h3>
                 <router-link :to="{ name: 'kataList', query: {level: 'intermediate'}}">
                     <div id="intermediateBoard" style="width: 250px"></div>
                 </router-link>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" v-else>
+                <h3>Intermediate (BLOCKED)</h3>
+                <div id="intermediateBoard" style="width: 250px"></div>
+            </div>
+            <div class="col-md-4" v-if="chessTrainer.level['advanced'] > 0">
                 <h3>Advanced</h3>
                 <router-link :to="{ name: 'kataList', query: {level: 'advanced'}}">
                     <div id="advancedBoard" style="width: 250px"></div>
                 </router-link>
+            </div>
+            <div class="col-md-4" v-else>
+                <h3>Advanced (BLOCKED)</h3>
+                <div id="advancedBoard" style="width: 250px"></div>
             </div>
         </div>
         <div class="row">
@@ -40,8 +48,17 @@
 </template>
 
 <script>
+    import localStorageService from 'core/localStorageService';
     import ChessBoard from 'chessboardjs';
     export default {
+        data() {
+            return {
+                chessTrainer: {}
+            }
+        },
+        created(){
+            this.chessTrainer = localStorageService.get();
+        },
         mounted(){
             ChessBoard('beginnerBoard', 'rn5k/pp1r2pp/2p1Q2B/8/8/2N3K1/PPP2PP1/R4R2 w - - 1 19'); //White to move and mate in 1.
             ChessBoard('intermediateBoard', '1r1q1rk1/p1p2pp1/2pp1n1p/8/N2bPPbB/3B4/P1P3PP/1R2QR1K w - - 2 16'); //White to move and win.

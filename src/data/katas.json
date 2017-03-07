@@ -2,6 +2,7 @@
     "beginner": [
         {
             "description": "Black mates in 4",
+            "level": "beginner",
             "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
             "currentMove": 0,
             "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
@@ -9,6 +10,7 @@
         },        
         {
             "description": "Black mates in 4",
+            "level": "beginner",
             "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
             "currentMove": 0,
             "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
@@ -16,6 +18,7 @@
         },        
         {
             "description": "Black mates in 4",
+            "level": "beginner",
             "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
             "currentMove": 0,
             "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
@@ -23,6 +26,7 @@
         },        
         {
             "description": "Black mates in 4",
+            "level": "beginner",
             "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
             "currentMove": 0,
             "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
@@ -30,6 +34,7 @@
         },        
         {
             "description": "Black mates in 4",
+            "level": "beginner",
             "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
             "currentMove": 0,
             "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
@@ -39,6 +44,7 @@
     "intermediate": [
         {
             "description": "Black mates in 4",
+            "level": "intermediate",
             "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
             "currentMove": 0,
             "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
@@ -46,6 +52,7 @@
         },        
         {
             "description": "Black mates in 4",
+            "level": "intermediate",
             "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
             "currentMove": 0,
             "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
@@ -53,6 +60,7 @@
         },        
         {
             "description": "Black mates in 4",
+            "level": "intermediate",
             "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
             "currentMove": 0,
             "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
@@ -60,6 +68,7 @@
         },        
         {
             "description": "Black mates in 4",
+            "level": "intermediate",
             "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
             "currentMove": 0,
             "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
@@ -67,6 +76,7 @@
         },        
         {
             "description": "Black mates in 4",
+            "level": "intermediate",
             "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
             "currentMove": 0,
             "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
@@ -76,6 +86,7 @@
     "advanced": [
         {
             "description": "Black mates in 4",
+            "level": "advanced",
             "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
             "currentMove": 0,
             "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
@@ -83,6 +94,7 @@
         },        
         {
             "description": "Black mates in 4",
+            "level": "advanced",
             "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
             "currentMove": 0,
             "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
@@ -90,6 +102,7 @@
         },        
         {
             "description": "Black mates in 4",
+            "level": "advanced",
             "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
             "currentMove": 0,
             "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
@@ -97,6 +110,7 @@
         },        
         {
             "description": "Black mates in 4",
+            "level": "advanced",
             "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
             "currentMove": 0,
             "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
@@ -104,6 +118,7 @@
         },        
         {
             "description": "Black mates in 4",
+            "level": "advanced",
             "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
             "currentMove": 0,
             "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
