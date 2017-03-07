@@ -79,7 +79,11 @@ var webpackConfig = merge(baseWebpackConfig, {
         from: 'node_modules/chessboardjs/www/img/',
         to: 'img/'
       }
-    ])
+    ]),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    }),
   ]
 })
 
