@@ -25,13 +25,13 @@
             <h1>Learning by practice</h1>
             <div class="col-md-6">
                 <h3>Play vs Computer</h3>
-                <router-link :to="{ name: 'computer'}">
+                <router-link to="computer">
                     <div id="computerBoard" style="width: 300px"></div>
                 </router-link>
             </div>
             <div class="col-md-6">
                 <h3>SandBox</h3>
-                <router-link :to="{ name: 'sandbox'}">
+                <router-link to="sandbox">
                     <div id="sandboxBoard" style="width: 300px"></div>
                 </router-link>
             </div>

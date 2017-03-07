@@ -1,33 +1,39 @@
 <template>
     <div>
         <div id="board" style="width: 400px"></div>
+        <historyTable :turn="turn" :pgn="pgn"></historyTable>
     </div>
 </template>
 
 <script>
+    import historyTable from 'components/historyTable';
     import ChessBoard from 'chessboardjs';
     import chess from 'chess.js';
-    var board;
-    var game = new chess();
+    
     export default {
+        components: {
+            historyTable
+        },
         data() {
-            return {                
+            return {
+                game: new chess(),
+                turn: 'White',
+                pgn: ''
             }
         },
-        mounted(){
-            // do not pick up pieces if the game is over
-            // only pick up pieces for the side to move
-            var onDragStart = function(source, piece, position, orientation) {
-                if (game.game_over() === true ||
-                    (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
-                    (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+        methods: {
+            onDragStart(source, piece, position, orientation) {
+                // do not pick up pieces if the game is over
+                // only pick up pieces for White
+                if (this.game.game_over() === true ||
+                    (this.game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+                    (this.game.turn() === 'b' && piece.search(/^w/) !== -1)) {
                     return false;
                 }
-            };
-
-            var onDrop = function(source, target) {
+            },            
+            onDrop(source, target) {
                 // see if the move is legal
-                var move = game.move({
+                var move = this.game.move({
                     from: source,
                     to: target,
                     promotion: 'q' // NOTE: always promote to a queen for example simplicity
@@ -36,30 +42,28 @@
                 // illegal move
                 if (move === null) return 'snapback';
 
-                updateStatus();
-                };
-
+                this.updateStatus();
+            },            
+            onSnapEnd() {
                 // update the board position after the piece snap 
                 // for castling, en passant, pawn promotion
-                var onSnapEnd = function() {
-                board.position(game.fen());
-                };
-
-                var updateStatus = function() {
+                this.board.position(this.game.fen());
+            },
+            updateStatus() {
                 var status = '';
 
                 var moveColor = 'White';
-                if (game.turn() === 'b') {
+                if (this.game.turn() === 'b') {
                     moveColor = 'Black';
                 }
 
                 // checkmate?
-                if (game.in_checkmate() === true) {
+                if (this.game.in_checkmate() === true) {
                     status = 'Game over, ' + moveColor + ' is in checkmate.';
                 }
 
                 // draw?
-                else if (game.in_draw() === true) {
+                else if (this.game.in_draw() === true) {
                     status = 'Game over, drawn position';
                 }
 
@@ -68,26 +72,27 @@
                     status = moveColor + ' to move';
 
                     // check?
-                    if (game.in_check() === true) {
+                    if (this.game.in_check() === true) {
                     status += ', ' + moveColor + ' is in check';
                     }
                 }
 
-                /*statusEl.html(status);
-                fenEl.html(game.fen());
-                pgnEl.html(game.pgn());*/
-            };
-
+                //statusEl.html(status);
+                this.turn = moveColor;
+                this.pgn = this.game.pgn();
+            }
+        },
+        mounted(){
             var cfg = {
                 draggable: true,
                 position: 'start',
-                onDragStart: onDragStart,
-                onDrop: onDrop,
-                onSnapEnd: onSnapEnd
+                onDragStart: this.onDragStart,
+                onDrop: this.onDrop,
+                onSnapEnd: this.onSnapEnd
             };
-            board = ChessBoard('board', cfg);
 
-            updateStatus();
+            this.board = ChessBoard('board', cfg);
+            this.updateStatus();
         }
     }
 
