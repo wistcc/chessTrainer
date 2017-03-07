@@ -13,10 +13,10 @@
             return {
                 game: new chess(),
                 currentKata: {
-                    fen: 'rn5k/pp1r2pp/2p1Q2B/8/8/2N3K1/PPP2PP1/R4R2 w - - 1 19',
+                    fen: '6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1',
                     currentMove: 0,
-                    userMoves: ['Qe8#'],
-                    computerMoves: []
+                    userMoves: ['Qe5', 'Rh2+', 'Qxg3#'],
+                    computerMoves: ['g3', 'Kg1']
                 }
             }
         },
@@ -29,6 +29,15 @@
                     (this.game.turn() === 'b' && piece.search(/^w/) !== -1)) {
                     return false;
                 }
+            },
+            makeComputerMove() {
+                // game over
+                if (this.currentKata.computerMoves[this.currentKata.currentMove] === null) return;
+
+                this.game.move(this.currentKata.computerMoves[this.currentKata.currentMove]);
+                this.board.position(this.game.fen());
+                this.currentKata.currentMove++;
+                this.updateStatus();
             },
             onDrop(source, target) {
                 // see if the move is legal
@@ -43,9 +52,13 @@
                 
                 if(move.san !== this.currentKata.userMoves[this.currentKata.currentMove]){
                     this.game.undo();
+                    return 'snapback';
                 }
 
                 this.updateStatus();
+
+                // make random legal move for black
+                window.setTimeout(this.makeComputerMove, 250);
             },
             onSnapEnd() {
                 // update the board position after the piece snap 
