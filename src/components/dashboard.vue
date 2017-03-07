@@ -4,19 +4,19 @@
             <h1>Katas</h1>
             <div class="col-md-4">
                 <h3>Beginner</h3>
-                <router-link :to="{ name: 'kata', params: {level: 1}}">
+                <router-link :to="{ name: 'kataList', query: {level: 'beginner'}}">
                     <div id="beginnerBoard" style="width: 250px"></div>
                 </router-link>
             </div>
             <div class="col-md-4">
                 <h3>Intermediate</h3>
-                <router-link :to="{ name: 'kata', params: {level: 2}}">
+                <router-link :to="{ name: 'kataList', query: {level: 'intermediate'}}">
                     <div id="intermediateBoard" style="width: 250px"></div>
                 </router-link>
             </div>
             <div class="col-md-4">
                 <h3>Advanced</h3>
-                <router-link :to="{ name: 'kata', params: {level: 3}}">
+                <router-link :to="{ name: 'kataList', query: {level: 'advanced'}}">
                     <div id="advancedBoard" style="width: 250px"></div>
                 </router-link>
             </div>

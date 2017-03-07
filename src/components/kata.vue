@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>Kata for {{level}}</h1>
         <notification :message="message"></notification>
         <div id="board" style="width: 400px"></div>
         <historyTable :status="status" :description="currentKata.description"></historyTable>
@@ -9,6 +10,7 @@
 <script>
     import historyTable from 'components/historyTable';
     import notification from 'components/notification';
+    import katas from 'data/katas';
     import ChessBoard from 'chessboardjs';
     import chess from 'chess.js';
     
@@ -20,15 +22,11 @@
         data() {
             return {
                 game: new chess(),
-                currentKata: {
-                    description: "Black mates in 4",
-                    fen: '6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1',
-                    currentMove: 0,
-                    userMoves: ['Qe5', 'Rh2+', 'Qxg3#'],
-                    computerMoves: ['g3', 'Kg1']
-                },
+                currentKata: {},
                 status: '',
-                message: ''
+                message: '',
+                level: this.$route.query.level,
+                kataNumber: this.$route.query.kataNumber || 0
             }
         },
         methods: {
@@ -110,7 +108,9 @@
                 this.status = status;
             }
         },
-        mounted(){
+        mounted(){            
+            this.currentKata = katas[this.$route.query.level][this.kataNumber];
+
             var cfg = {
                 draggable: true,
                 position: this.currentKata.fen,
@@ -118,9 +118,9 @@
                 onDrop: this.onDrop,
                 onSnapEnd: this.onSnapEnd
             };
+
             this.board = ChessBoard('board', cfg);
             this.game.load(this.currentKata.fen);
-
             this.updateStatus();
         }
     }
