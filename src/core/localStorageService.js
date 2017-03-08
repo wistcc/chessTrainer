@@ -1,7 +1,10 @@
 const name = 'chessTrainer';
 const emptyChessTrainer = {
     points: 0,
-    level: [0]
+    currentKata: {
+        'level': 0,
+        'kata': 0
+    }
 }
 
 let get = () => {

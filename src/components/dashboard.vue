@@ -3,7 +3,7 @@
         <div class="row">
             <h1>Katas</h1>
             <div class="col-md-4" v-for="(level, index) in levels">
-                <div v-if="chessTrainer.level[index] >= 0">
+                <div v-if="chessTrainer.currentKata.level >= index">
                     <h3>{{level.name}}</h3>
                     <router-link :to="{ name: 'kataList', query: {levelIndex: index}}">
                         <div :id="'board' + level.name" style="width: 250px"></div>

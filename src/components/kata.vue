@@ -6,6 +6,9 @@
         <span v-if="nextLevel">
             <button @click="goNextLevel">Next Level</button>
         </span>
+        <span v-if="!isInCurrentKata">
+            <button @click="goCurrentKata">Keep on tack, go to your current Kata</button>
+        </span>
         <h1>Kata {{kataIndex + 1}}/{{kataTotal}} for {{level.name}}</h1>
         <div id="board" style="width: 400px"></div>
         <historyTable :status="status" :description="currentKata.description"></historyTable>
@@ -13,6 +16,7 @@
 </template>
 
 <script>
+    import localStorageService from 'core/localStorageService';
     import historyTable from 'components/historyTable';
     import katas from 'data/katas';
     import ChessBoard from 'chessboardjs';
@@ -26,6 +30,7 @@
             return {
                 game: new chess(),
                 currentKata: {},
+                chessTrainer: {},
                 status: '',
                 levelIndex: 0,
                 level: {},
@@ -141,6 +146,11 @@
                 this.kataIndex++;
                 this.loadBoard();
             },
+            goCurrentKata() {
+                this.levelIndex = this.chessTrainer.currentKata.level;
+                this.kataIndex = this.chessTrainer.currentKata.kata;
+                this.loadBoard();
+            },
             goNextLevel() {
                 this.nextLevel = false;
                 this.kataIndex = 0;
@@ -148,16 +158,25 @@
                 this.loadBoard();
             },
             clearValues() {
-                this.game= new chess();
-                this.currentKata= {};
-                this.status= '';
-                this.levelInde= parseInt(this.$route.params.levelIndex) || 0;
-                this.level= {};
-                this.kataIndex= parseInt(this.$route.params.kataIndex) || 0;
-                this.kataTotal= 0;
-                this.nextKata= false;
-                this.nextLevel= false;
+                this.game = new chess();
+                this.currentKata = {};
+                this.chessTrainer = localStorageService.get();
+                this.status = '';
+                this.levelIndex = this.$route.params.levelIndex >= 0 ? this.$route.params.levelIndex : this.chessTrainer.currentKata.level;
+                this.level = {};
+                this.kataIndex = this.$route.params.kataIndex >= 0 ? this.$route.params.kataIndex : this.chessTrainer.currentKata.kata;
+                this.kataTotal = 0;
+                this.nextKata = false;
+                this.nextLevel = false;
             }
+        },
+        computed: {
+            isInCurrentKata() {
+                return this.levelIndex === this.chessTrainer.currentKata.level && this.kataIndex === this.chessTrainer.currentKata.kata;
+            }
+        },
+        created() {            
+            this.chessTrainer = localStorageService.get();
         },
         mounted() {
             this.clearValues();
