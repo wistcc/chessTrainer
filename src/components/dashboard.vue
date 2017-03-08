@@ -3,11 +3,15 @@
         <div class="row">
             <h1>Katas</h1>
             <div class="col-md-4" v-for="(level, index) in levels">
-                <div>
+                <div v-if="chessTrainer.level[index] >= 0">
                     <h3>{{level.name}}</h3>
                     <router-link :to="{ name: 'kataList', query: {levelIndex: index}}">
                         <div :id="'board' + level.name" style="width: 250px"></div>
                     </router-link>
+                </div>
+                <div v-else>
+                    <h3>{{level.name}} (BLOCKED)</h3>
+                    <div :id="'board' + level.name" style="width: 250px"></div>
                 </div>
             </div>            
         </div>

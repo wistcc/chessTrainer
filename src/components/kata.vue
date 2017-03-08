@@ -3,7 +3,7 @@
         <span v-if="nextKata">
             <button @click="goNextKata">Next Kata</button>
         </span>
-        <span v-if="!nextLevel">
+        <span v-if="nextLevel">
             <button @click="goNextLevel">Next Level</button>
         </span>
         <h1>Kata {{kataIndex + 1}}/{{kataTotal}} for {{level.name}}</h1>
@@ -27,9 +27,9 @@
                 game: new chess(),
                 currentKata: {},
                 status: '',
-                levelIndex: this.$route.params.levelIndex,
+                levelIndex: 0,
                 level: {},
-                kataIndex: parseInt(this.$route.params.kataIndex) || 0,
+                kataIndex: 0,
                 kataTotal: 0,
                 nextKata: false,
                 nextLevel: false
@@ -110,7 +110,7 @@
 
                 this.status = status;
 
-                if((this.currentKata.userMoves.length - 1) === this.currentKata.currentMove) {
+                if(this.currentKata.userMoves.length === this.currentKata.currentMove) {
                     if(this.kataIndex + 1 < this.kataTotal){
                         this.nextKata = true;
                     }
@@ -146,9 +146,21 @@
                 this.kataIndex = 0;
                 this.levelIndex++;
                 this.loadBoard();
+            },
+            clearValues() {
+                this.game= new chess();
+                this.currentKata= {};
+                this.status= '';
+                this.levelInde= parseInt(this.$route.params.levelIndex) || 0;
+                this.level= {};
+                this.kataIndex= parseInt(this.$route.params.kataIndex) || 0;
+                this.kataTotal= 0;
+                this.nextKata= false;
+                this.nextLevel= false;
             }
         },
-        mounted(){
+        mounted() {
+            this.clearValues();
             this.loadBoard();
         }
     }
