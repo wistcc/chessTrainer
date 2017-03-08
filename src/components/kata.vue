@@ -1,5 +1,8 @@
 <template>
     <div>
+        <span v-if="nextKata">
+            <button @click="goNextKata">Next Kata</button>
+        </span>
         <h1>Kata {{kataNumber + 1}}/{{kataTotal}} for {{level}}</h1>
         <div id="board" style="width: 400px"></div>
         <historyTable :status="status" :description="currentKata.description"></historyTable>
@@ -23,7 +26,8 @@
                 status: '',
                 level: this.$route.params.level,
                 kataNumber: parseInt(this.$route.params.kataNumber) || 0,
-                kataTotal: 0
+                kataTotal: 0,
+                nextKata: false
             }
         },
         methods: {
@@ -100,8 +104,15 @@
                 }
 
                 this.status = status;
+
+                if((this.currentKata.userMoves.length - 1) === this.currentKata.currentMove) {
+                    this.nextKata = true;
+                }
             },
-            loadBoard(){
+            loadBoard(level) {
+                this.currentKata = katas[level][this.kataNumber];
+                this.kataTotal = katas[level].length;
+
                 var cfg = {
                     draggable: true,
                     position: this.currentKata.fen,
@@ -112,14 +123,19 @@
 
                 this.board = ChessBoard('board', cfg);
                 this.game.load(this.currentKata.fen);
+            },
+            goNextKata() {
+                this.kataNumber++;
+                this.resetValues();
+                this.loadBoard(this.level);
+            },
+            resetValues(){
+                this.nextKata = false;
+                this.status = '';
             }
         },
-        created(){
-            this.currentKata = katas[this.$route.params.level][this.kataNumber];
-            this.kataTotal = katas[this.$route.params.level].length;
-        },
         mounted(){
-            this.loadBoard();
+            this.loadBoard(this.$route.params.level);
             this.updateStatus();
         }
     }
