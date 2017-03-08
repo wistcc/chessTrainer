@@ -1,11 +1,7 @@
 const name = 'chessTrainer';
 const emptyChessTrainer = {
     points: 0,
-    level: {
-        beginner: 2,
-        intermediate: 0,
-        advanced: 0
-    }
+    level: [2]
 }
 
 let get = () => {

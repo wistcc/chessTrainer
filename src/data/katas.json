@@ -1,128 +1,124 @@
 {
-    "beginner": [
+    "levels": [
         {
-            "description": "Black mates in 4",
-            "level": "beginner",
-            "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
-            "currentMove": 0,
-            "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
-            "computerMoves": ["g3", "Kg1"]
-        },        
+            "name": "Beginner",
+            "katas": [
+                {
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
+                    "currentMove": 0,
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
+                },        
+                {
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
+                    "currentMove": 0,
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
+                },        
+                {
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
+                    "currentMove": 0,
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
+                },        
+                {
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
+                    "currentMove": 0,
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
+                },        
+                {
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
+                    "currentMove": 0,
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
+                }
+            ]
+        },
         {
-            "description": "Black mates in 4",
-            "level": "beginner",
-            "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
-            "currentMove": 0,
-            "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
-            "computerMoves": ["g3", "Kg1"]
-        },        
+            "name": "Intermediate",
+            "katas": [
+                {
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
+                    "currentMove": 0,
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
+                },        
+                {
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
+                    "currentMove": 0,
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
+                },        
+                {
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
+                    "currentMove": 0,
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
+                },        
+                {
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
+                    "currentMove": 0,
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
+                },        
+                {
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
+                    "currentMove": 0,
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
+                }
+            ]
+        },
         {
-            "description": "Black mates in 4",
-            "level": "beginner",
-            "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
-            "currentMove": 0,
-            "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
-            "computerMoves": ["g3", "Kg1"]
-        },        
-        {
-            "description": "Black mates in 4",
-            "level": "beginner",
-            "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
-            "currentMove": 0,
-            "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
-            "computerMoves": ["g3", "Kg1"]
-        },        
-        {
-            "description": "Black mates in 4",
-            "level": "beginner",
-            "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
-            "currentMove": 0,
-            "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
-            "computerMoves": ["g3", "Kg1"]
-        }
-    ],
-    "intermediate": [
-        {
-            "description": "Black mates in 4",
-            "level": "intermediate",
-            "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
-            "currentMove": 0,
-            "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
-            "computerMoves": ["g3", "Kg1"]
-        },        
-        {
-            "description": "Black mates in 4",
-            "level": "intermediate",
-            "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
-            "currentMove": 0,
-            "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
-            "computerMoves": ["g3", "Kg1"]
-        },        
-        {
-            "description": "Black mates in 4",
-            "level": "intermediate",
-            "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
-            "currentMove": 0,
-            "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
-            "computerMoves": ["g3", "Kg1"]
-        },        
-        {
-            "description": "Black mates in 4",
-            "level": "intermediate",
-            "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
-            "currentMove": 0,
-            "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
-            "computerMoves": ["g3", "Kg1"]
-        },        
-        {
-            "description": "Black mates in 4",
-            "level": "intermediate",
-            "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
-            "currentMove": 0,
-            "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
-            "computerMoves": ["g3", "Kg1"]
-        }
-    ],
-    "advanced": [
-        {
-            "description": "Black mates in 4",
-            "level": "advanced",
-            "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
-            "currentMove": 0,
-            "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
-            "computerMoves": ["g3", "Kg1"]
-        },        
-        {
-            "description": "Black mates in 4",
-            "level": "advanced",
-            "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
-            "currentMove": 0,
-            "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
-            "computerMoves": ["g3", "Kg1"]
-        },        
-        {
-            "description": "Black mates in 4",
-            "level": "advanced",
-            "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
-            "currentMove": 0,
-            "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
-            "computerMoves": ["g3", "Kg1"]
-        },        
-        {
-            "description": "Black mates in 4",
-            "level": "advanced",
-            "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
-            "currentMove": 0,
-            "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
-            "computerMoves": ["g3", "Kg1"]
-        },        
-        {
-            "description": "Black mates in 4",
-            "level": "advanced",
-            "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
-            "currentMove": 0,
-            "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
-            "computerMoves": ["g3", "Kg1"]
+            "name": "Advanced",
+            "katas": [
+                {
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
+                    "currentMove": 0,
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
+                },        
+                {
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
+                    "currentMove": 0,
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
+                },        
+                {
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
+                    "currentMove": 0,
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
+                },        
+                {
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
+                    "currentMove": 0,
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
+                },        
+                {
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
+                    "currentMove": 0,
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
+                }
+            ]
         }
     ]
 }

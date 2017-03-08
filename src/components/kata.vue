@@ -3,7 +3,10 @@
         <span v-if="nextKata">
             <button @click="goNextKata">Next Kata</button>
         </span>
-        <h1>Kata {{kataNumber + 1}}/{{kataTotal}} for {{level}}</h1>
+        <span v-if="!nextLevel">
+            <button @click="goNextLevel">Next Level</button>
+        </span>
+        <h1>Kata {{kataIndex + 1}}/{{kataTotal}} for {{level.name}}</h1>
         <div id="board" style="width: 400px"></div>
         <historyTable :status="status" :description="currentKata.description"></historyTable>
     </div>
@@ -24,10 +27,12 @@
                 game: new chess(),
                 currentKata: {},
                 status: '',
-                level: this.$route.params.level,
-                kataNumber: parseInt(this.$route.params.kataNumber) || 0,
+                levelIndex: this.$route.params.levelIndex,
+                level: {},
+                kataIndex: parseInt(this.$route.params.kataIndex) || 0,
                 kataTotal: 0,
-                nextKata: false
+                nextKata: false,
+                nextLevel: false
             }
         },
         methods: {
@@ -106,12 +111,18 @@
                 this.status = status;
 
                 if((this.currentKata.userMoves.length - 1) === this.currentKata.currentMove) {
-                    this.nextKata = true;
+                    if(this.kataIndex + 1 < this.kataTotal){
+                        this.nextKata = true;
+                    }
+                    else {
+                        this.nextLevel = true;
+                    }
                 }
             },
-            loadBoard(level) {
-                this.currentKata = katas[level][this.kataNumber];
-                this.kataTotal = katas[level].length;
+            loadBoard() {
+                this.level = katas.levels[this.levelIndex];
+                this.currentKata = this.level.katas[this.kataIndex];
+                this.kataTotal = this.level.katas.length;
 
                 var cfg = {
                     draggable: true,
@@ -123,20 +134,22 @@
 
                 this.board = ChessBoard('board', cfg);
                 this.game.load(this.currentKata.fen);
+                this.updateStatus();
             },
             goNextKata() {
-                this.kataNumber++;
-                this.resetValues();
-                this.loadBoard(this.level);
-            },
-            resetValues(){
                 this.nextKata = false;
-                this.status = '';
+                this.kataIndex++;
+                this.loadBoard();
+            },
+            goNextLevel() {
+                this.nextLevel = false;
+                this.kataIndex = 0;
+                this.levelIndex++;
+                this.loadBoard();
             }
         },
         mounted(){
-            this.loadBoard(this.$route.params.level);
-            this.updateStatus();
+            this.loadBoard();
         }
     }
 

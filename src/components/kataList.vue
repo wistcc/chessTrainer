@@ -1,9 +1,9 @@
 <template>
     <div class="row">
         <div class="col-md-4" v-for="(kata, index) in kataList">
-            <span v-if="chessTrainer.level[kata.level] > index">
+            <span v-if="chessTrainer.level[levelIndex] > index">
                 <h3>{{kata.description}}</h3>
-                <router-link :to="{ name: 'kata', params: {level: kata.level, kataNumber: index}}">
+                <router-link :to="{ name: 'kata', params: {levelIndex: levelIndex, kataIndex: index}}">
                     <div :id="'board' + index" style="width: 250px"></div>
                 </router-link>
             </span>
@@ -23,11 +23,15 @@
     export default {
         data() {
             return {
-                kataList: katas[this.$route.query.level],
+                levelIndex: this.$route.query.levelIndex,
+                level: {},
+                kataList: {},                
                 chessTrainer: {}
             }
         },
         created(){
+            this.level = katas.levels[this.levelIndex];
+            this.kataList = this.level.katas;
             this.chessTrainer = localStorageService.get();
         },
         mounted() {

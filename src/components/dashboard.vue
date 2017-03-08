@@ -2,32 +2,14 @@
     <div class="container">
         <div class="row">
             <h1>Katas</h1>
-            <div class="col-md-4">
-                <h3>Beginner</h3>
-                <router-link :to="{ name: 'kataList', query: {level: 'beginner'}}">
-                    <div id="beginnerBoard" style="width: 250px"></div>
-                </router-link>
-            </div>
-            <div class="col-md-4" v-if="chessTrainer.level['intermediate'] > 0">
-                <h3>Intermediate</h3>
-                <router-link :to="{ name: 'kataList', query: {level: 'intermediate'}}">
-                    <div id="intermediateBoard" style="width: 250px"></div>
-                </router-link>
-            </div>
-            <div class="col-md-4" v-else>
-                <h3>Intermediate (BLOCKED)</h3>
-                <div id="intermediateBoard" style="width: 250px"></div>
-            </div>
-            <div class="col-md-4" v-if="chessTrainer.level['advanced'] > 0">
-                <h3>Advanced</h3>
-                <router-link :to="{ name: 'kataList', query: {level: 'advanced'}}">
-                    <div id="advancedBoard" style="width: 250px"></div>
-                </router-link>
-            </div>
-            <div class="col-md-4" v-else>
-                <h3>Advanced (BLOCKED)</h3>
-                <div id="advancedBoard" style="width: 250px"></div>
-            </div>
+            <div class="col-md-4" v-for="(level, index) in levels">
+                <div>
+                    <h3>{{level.name}}</h3>
+                    <router-link :to="{ name: 'kataList', query: {levelIndex: index}}">
+                        <div :id="'board' + level.name" style="width: 250px"></div>
+                    </router-link>
+                </div>
+            </div>            
         </div>
         <div class="row">
             <h1>Learning by practice</h1>
@@ -49,10 +31,13 @@
 
 <script>
     import localStorageService from 'core/localStorageService';
+    import katas from 'data/katas';
     import ChessBoard from 'chessboardjs';
+
     export default {
         data() {
             return {
+                levels: katas.levels,
                 chessTrainer: {}
             }
         },
@@ -60,9 +45,11 @@
             this.chessTrainer = localStorageService.get();
         },
         mounted(){
-            ChessBoard('beginnerBoard', 'rn5k/pp1r2pp/2p1Q2B/8/8/2N3K1/PPP2PP1/R4R2 w - - 1 19'); //White to move and mate in 1.
-            ChessBoard('intermediateBoard', '1r1q1rk1/p1p2pp1/2pp1n1p/8/N2bPPbB/3B4/P1P3PP/1R2QR1K w - - 2 16'); //White to move and win.
-            ChessBoard('advancedBoard', '5rk1/Q4pp1/7p/3p4/bq1r1P2/3B2P1/P3R2P/4R1K1 w - - 7 30'); //White to move and win.
+            for(let i =0; i < this.levels.length; i++){
+                var level = this.levels[i]; 
+                ChessBoard('board' + level.name, level.katas[0].fen);
+            }
+            
             ChessBoard('computerBoard', 'start');
             ChessBoard('sandboxBoard', {  d6: 'bK',  d4: 'wP',  e4: 'wK'});
         }
