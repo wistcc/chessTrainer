@@ -23,7 +23,19 @@ const mutations = {
         state.currentKata.level = levelIndex;
     },
     UPDATE_POINTS (state, points){
-        state.currentKata.points = points;
+        state.chessTrainer.points = points;
+    }
+}
+
+const actions = {
+    updateKata ({ commit }, kataIndex) {
+        commit('UPDATE_KATA', kataIndex);
+    },
+    updateLevel ({ commit }, levelIndex) {
+        commit('UPDATE_LEVEL', kataIndex);
+    },
+    updatePoints ({ commit }, points) {
+        commit('UPDATE_POINTS', points);
     }
 }
 
@@ -36,5 +48,6 @@ const getters = {
 export default new Vuex.Store({
   state,
   mutations,
+  actions,
   getters
 })
