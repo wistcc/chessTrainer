@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-md-4" v-for="(kata, index) in kataList">
-            <span v-if="getCurrentLevel >= levelIndex && getCurrentKata >= index">
+            <span v-if="getCurrentLevel > levelIndex || getCurrentKata >= index">
                 <h3>{{kata.description}}</h3>
                 <router-link :to="{ name: 'kata', params: {levelIndex: levelIndex, kataIndex: index}}">
                     <div :id="'board' + index" style="width: 250px"></div>
