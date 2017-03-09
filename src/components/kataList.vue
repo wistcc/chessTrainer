@@ -1,5 +1,6 @@
 <template>
     <div class="row">
+        <router-link to="/">Dashboard</router-link>
         <div class="col-md-4" v-for="(kata, index) in kataList">
             <span v-if="getCurrentLevel > levelIndex || getCurrentKata >= index">
                 <h3>{{kata.description}}</h3>

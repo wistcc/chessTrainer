@@ -1,5 +1,6 @@
 <template>
     <div>
+        <router-link to="/">Dashboard</router-link>
         <div id="board" style="width: 400px"></div>
         <historyTable :status="status" :pgn="pgn"></historyTable>
     </div>

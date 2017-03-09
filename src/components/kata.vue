@@ -1,5 +1,6 @@
 <template>
     <div>
+        <router-link :to="{ name: 'kataList', query: {levelIndex: levelIndex}}">Katas list</router-link>
         <span v-if="nextKata">
             <button @click="goNextKata">Next Kata</button>
         </span>

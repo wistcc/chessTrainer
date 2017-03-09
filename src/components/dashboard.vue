@@ -1,6 +1,11 @@
 <template>
     <div class="container">
         <div class="row">
+            <router-link to="configurations">
+                Settings
+            </router-link>
+        </div>
+        <div class="row">
             <h1>Katas</h1>
             <div class="col-md-4" v-for="(level, index) in levels">
                 <div v-if="getCurrentLevel >= index">

@@ -1,9 +1,12 @@
 const name = 'chessTrainer';
 const emptyChessTrainer = {
     points: 0,
-    currentKata: {
-        level: 0,
-        kata: 0
+    currentLevel: 0,
+    currentKata: 0,
+    configurations: {
+        validateLegalMoves: true,
+        highlightLegalMoves: false,
+        highlightPiece: false
     }
 }
 
