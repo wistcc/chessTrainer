@@ -16,7 +16,6 @@
 </template>
 
 <script>
-    import localStorageService from 'core/localStorageService';
     import historyTable from 'components/historyTable';
     import katas from 'data/katas';
     import ChessBoard from 'chessboardjs';
@@ -30,7 +29,6 @@
             return {
                 game: new chess(),
                 currentKata: {},
-                chessTrainer: {},
                 status: '',
                 levelIndex: 0,
                 level: {},
@@ -147,8 +145,8 @@
                 this.loadBoard();
             },
             goCurrentKata() {
-                this.levelIndex = this.chessTrainer.currentKata.level;
-                this.kataIndex = this.chessTrainer.currentKata.kata;
+                this.levelIndex = this.getCurrentLevel;
+                this.kataIndex = this.getCurrentKata;
                 this.loadBoard();
             },
             goNextLevel() {
@@ -160,11 +158,10 @@
             clearValues() {
                 this.game = new chess();
                 this.currentKata = {};
-                this.chessTrainer = localStorageService.get();
                 this.status = '';
-                this.levelIndex = this.$route.params.levelIndex >= 0 ? this.$route.params.levelIndex : this.chessTrainer.currentKata.level;
+                this.levelIndex = this.$route.params.levelIndex >= 0 ? this.$route.params.levelIndex : this.getCurrentLevel;
                 this.level = {};
-                this.kataIndex = this.$route.params.kataIndex >= 0 ? this.$route.params.kataIndex : this.chessTrainer.currentKata.kata;
+                this.kataIndex = this.$route.params.kataIndex >= 0 ? this.$route.params.kataIndex : this.getCurrentKata;
                 this.kataTotal = 0;
                 this.nextKata = false;
                 this.nextLevel = false;
@@ -172,11 +169,14 @@
         },
         computed: {
             isInCurrentKata() {
-                return this.levelIndex === this.chessTrainer.currentKata.level && this.kataIndex === this.chessTrainer.currentKata.kata;
+                return this.levelIndex === this.getCurrentLevel && this.kataIndex === this.getCurrentKata;
+            },
+            getCurrentLevel(){
+                return this.$store.getters.getCurrentLevel;
+            },
+            getCurrentKata(){
+                return this.$store.getters.getCurrentKata;
             }
-        },
-        created() {            
-            this.chessTrainer = localStorageService.get();
         },
         mounted() {
             this.clearValues();

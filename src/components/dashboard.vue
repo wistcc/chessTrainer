@@ -3,7 +3,7 @@
         <div class="row">
             <h1>Katas</h1>
             <div class="col-md-4" v-for="(level, index) in levels">
-                <div v-if="chessTrainer.currentKata.level >= index">
+                <div v-if="getCurrentLevel >= index">
                     <h3>{{level.name}}</h3>
                     <router-link :to="{ name: 'kataList', query: {levelIndex: index}}">
                         <div :id="'board' + level.name" style="width: 250px"></div>
@@ -34,19 +34,19 @@
 </template>
 
 <script>
-    import localStorageService from 'core/localStorageService';
     import katas from 'data/katas';
     import ChessBoard from 'chessboardjs';
 
     export default {
         data() {
             return {
-                levels: katas.levels,
-                chessTrainer: {}
+                levels: katas.levels
             }
         },
-        created(){
-            this.chessTrainer = localStorageService.get();
+        computed: {
+            getCurrentLevel(){
+                return this.$store.getters.getCurrentLevel;
+            }
         },
         mounted(){
             for(let i =0; i < this.levels.length; i++){
