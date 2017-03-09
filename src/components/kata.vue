@@ -17,6 +17,7 @@
 </template>
 
 <script>
+    import chessTainerService from 'core/chessTainerService';
     import historyTable from 'components/historyTable';
     import katas from 'data/katas';
     import ChessBoard from 'chessboardjs';
@@ -79,11 +80,6 @@
                 // make random legal move for black
                 window.setTimeout(this.makeComputerMove, 250);
             },
-            onSnapEnd() {
-                // update the board position after the piece snap 
-                // for castling, en passant, pawn promotion
-                this.board.position(this.game.fen());
-            },
             updateStatus() {
                 var status = '';
 
@@ -133,7 +129,7 @@
                     position: this.currentKata.fen,
                     onDragStart: this.onDragStart,
                     onDrop: this.onDrop,
-                    onSnapEnd: this.onSnapEnd
+                    onSnapEnd: chessTainerService.onSnapEnd.bind(this)
                 };
 
                 this.board = ChessBoard('board', cfg);

@@ -7,6 +7,7 @@
 </template>
 
 <script>
+    import chessTainerService from 'core/chessTainerService';
     import historyTable from 'components/historyTable';
     import ChessBoard from 'chessboardjs';
     import chess from 'chess.js';
@@ -43,44 +44,7 @@
                 // illegal move
                 if (move === null) return 'snapback';
 
-                this.updateStatus();
-            },            
-            onSnapEnd() {
-                // update the board position after the piece snap 
-                // for castling, en passant, pawn promotion
-                this.board.position(this.game.fen());
-            },
-            updateStatus() {
-                var status = '';
-
-                var moveColor = 'White';
-                if (this.game.turn() === 'b') {
-                    moveColor = 'Black';
-                }
-
-                // checkmate?
-                if (this.game.in_checkmate() === true) {
-                    status = 'Game over, ' + moveColor + ' is in checkmate.';
-                }
-
-                // draw?
-                else if (this.game.in_draw() === true) {
-                    status = 'Game over, drawn position';
-                }
-
-                // game still on
-                else {
-                    status = moveColor + ' to move';
-
-                    // check?
-                    if (this.game.in_check() === true) {
-                        status += ', ' + moveColor + ' is in check';
-                    }
-                }
-
-                //statusEl.html(status);
-                this.status = status;
-                this.pgn = this.game.pgn();
+                chessTainerService.updateStatus.call(this);
             }
         },
         mounted(){
@@ -89,11 +53,11 @@
                 position: 'start',
                 onDragStart: this.onDragStart,
                 onDrop: this.onDrop,
-                onSnapEnd: this.onSnapEnd
+                onSnapEnd: chessTainerService.onSnapEnd.bind(this)
             };
 
             this.board = ChessBoard('board', cfg);
-            this.updateStatus();
+            chessTainerService.updateStatus.call(this);
         }
     }
 
