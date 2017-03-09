@@ -5,6 +5,10 @@ let chessTrainer = localStorageService.get();
 
 Vue.use(Vuex)
 
+let updateLocalStorage = function(){
+    localStorageService.set(state.chessTrainer);
+}
+
 const state = {
     chessTrainer: {
         points: chessTrainer.points || 0,
@@ -17,13 +21,17 @@ const state = {
 
 const mutations = {
     UPDATE_KATA (state, kataIndex){
-        state.currentKata.kata = kataIndex;
+        state.chessTrainer.currentKata.kata = kataIndex;
+        updateLocalStorage();
     },
     UPDATE_LEVEL (state, levelIndex){
-        state.currentKata.level = levelIndex;
+        state.chessTrainer.currentKata.level = levelIndex;
+        state.chessTrainer.currentKata.kata = 0;
+        updateLocalStorage();
     },
     UPDATE_POINTS (state, points){
         state.chessTrainer.points = points;
+        updateLocalStorage();
     }
 }
 
@@ -32,7 +40,7 @@ const actions = {
         commit('UPDATE_KATA', kataIndex);
     },
     updateLevel ({ commit }, levelIndex) {
-        commit('UPDATE_LEVEL', kataIndex);
+        commit('UPDATE_LEVEL', levelIndex);
     },
     updatePoints ({ commit }, points) {
         commit('UPDATE_POINTS', points);

@@ -142,6 +142,7 @@
             goNextKata() {
                 this.nextKata = false;
                 this.kataIndex++;
+                this.$store.dispatch('updateKata', this.kataIndex);
                 this.loadBoard();
             },
             goCurrentKata() {
@@ -153,15 +154,16 @@
                 this.nextLevel = false;
                 this.kataIndex = 0;
                 this.levelIndex++;
+                this.$store.dispatch('updateLevel', this.levelIndex);
                 this.loadBoard();
             },
             clearValues() {
+                this.levelIndex = this.$route.params.levelIndex >= 0 ? parseInt(this.$route.params.levelIndex) : this.getCurrentLevel;
+                this.kataIndex = this.$route.params.kataIndex >= 0 ? parseInt(this.$route.params.kataIndex) : this.getCurrentKata;
                 this.game = new chess();
                 this.currentKata = {};
                 this.status = '';
-                this.levelIndex = this.$route.params.levelIndex >= 0 ? this.$route.params.levelIndex : this.getCurrentLevel;
                 this.level = {};
-                this.kataIndex = this.$route.params.kataIndex >= 0 ? this.$route.params.kataIndex : this.getCurrentKata;
                 this.kataTotal = 0;
                 this.nextKata = false;
                 this.nextLevel = false;
