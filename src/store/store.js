@@ -22,15 +22,13 @@ const state = {
 const mutations = {
     UPDATE_KATA (state, kataIndex){
         state.chessTrainer.currentKata.kata = kataIndex;
+        state.chessTrainer.points += 10;
         updateLocalStorage();
     },
     UPDATE_LEVEL (state, levelIndex){
         state.chessTrainer.currentKata.level = levelIndex;
+        state.chessTrainer.points += 60;
         state.chessTrainer.currentKata.kata = 0;
-        updateLocalStorage();
-    },
-    UPDATE_POINTS (state, points){
-        state.chessTrainer.points = points;
         updateLocalStorage();
     }
 }
@@ -41,9 +39,6 @@ const actions = {
     },
     updateLevel ({ commit }, levelIndex) {
         commit('UPDATE_LEVEL', levelIndex);
-    },
-    updatePoints ({ commit }, points) {
-        commit('UPDATE_POINTS', points);
     }
 }
 
