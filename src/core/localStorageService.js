@@ -11,10 +11,17 @@ const emptyChessTrainer = {
     }
 }
 
+let objectIsCorrect = chessTrainer => {
+    var chessTrainerKeys = Object.keys(JSON.parse(chessTrainer)).sort();
+    var emptyChessTrainerKeys = Object.keys(emptyChessTrainer).sort();
+
+    return JSON.stringify(chessTrainerKeys) === JSON.stringify(emptyChessTrainerKeys);
+}
+
 let get = () => {
     let chessTrainer = localStorage.getItem(name);
 
-    if (chessTrainer === null) {
+    if (chessTrainer === null || !objectIsCorrect(chessTrainer)) {
         return set();
     }
 
