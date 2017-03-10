@@ -11,7 +11,7 @@
             <button @click="goCurrentKata">Keep on tack, go to your current Kata</button>
         </span>
         <h1>Kata {{kataIndex + 1}}/{{kataTotal}} for {{level.name}}</h1>
-        <div id="board" style="width: 400px"></div>
+        <div id="kataBoard" style="width: 400px"></div>
         <historyTable :status="status" :description="currentKata.description" :showUndoMove="false"></historyTable>
     </div>
 </template>
@@ -36,7 +36,8 @@
                 kataIndex: 0,
                 kataTotal: 0,
                 nextKata: false,
-                nextLevel: false
+                nextLevel: false,
+                squareToHighlight: {}
             }
         },
         methods: {
@@ -50,15 +51,34 @@
                 }
             },
             makeComputerMove() {
-                // game over
-                if (this.currentKata.computerMoves[this.currentKata.currentMove] === null) return;
+                if(this.currentKata.userMoves.length === (this.currentKata.currentMove + 1)) {
+                    if(this.kataIndex + 1 < this.kataTotal){
+                        this.nextKata = true;
+                    }
+                    else {
+                        this.nextLevel = true;
+                    }
+                }
 
-                this.getCurrentGame.move(this.currentKata.computerMoves[this.currentKata.currentMove]);
-                this.getCurrentBoard.position(this.getCurrentGame.fen());
+                // game over
+                if (!this.currentKata.computerMoves[this.currentKata.currentMove]) return;
+
+                var move = this.getCurrentGame.move(this.currentKata.computerMoves[this.currentKata.currentMove]);
+                this.getCurrentBoard.boardObject.position(this.getCurrentGame.fen());
                 this.currentKata.currentMove++;
+                
+                if(this.getConfigurations.highlightPiece) {
+                    // highlight black's move
+                    this.removeHighlights('black');
+                    this.getCurrentBoard.boardElement.find('.square-' + move.from).addClass('highlight-black');
+                    this.squareToHighlight = move.to;
+                }
+
                 this.updateStatus();
             },
             onDrop(source, target) {
+                if(this.getConfigurations.highlightLegalMoves) chessTainerHelper.removeGreySquares(this.getCurrentBoard.boardId);
+
                 // see if the move is legal
                 var move = this.getCurrentGame.move({
                     from: source,
@@ -75,6 +95,13 @@
                 }
 
                 this.updateStatus();
+
+                if(this.getConfigurations.highlightPiece) {
+                    // highlight white's move
+                    this.removeHighlights('white');
+                    this.getCurrentBoard.boardElement.find('.square-' + source).addClass('highlight-white');
+                    this.getCurrentBoard.boardElement.find('.square-' + target).addClass('highlight-white');
+                }
 
                 // make random legal move for black
                 window.setTimeout(this.makeComputerMove, 250);
@@ -108,15 +135,6 @@
                 }
 
                 this.status = status;
-
-                if(this.currentKata.userMoves.length === this.currentKata.currentMove) {
-                    if(this.kataIndex + 1 < this.kataTotal){
-                        this.nextKata = true;
-                    }
-                    else {
-                        this.nextLevel = true;
-                    }
-                }
             },
             loadBoard() {
                 this.level = katas.levels[this.levelIndex];
@@ -131,7 +149,22 @@
                     onSnapEnd: chessTainerHelper.onSnapEnd.bind(this)
                 };
 
-                this.$store.dispatch('updateCurrentBoard', ChessBoard('board', cfg));
+                if(this.getConfigurations.highlightLegalMoves) {
+                    cfg.onMouseoutSquare = chessTainerHelper.onMouseoutSquare.bind(this);
+                    cfg.onMouseoverSquare = chessTainerHelper.onMouseoverSquare.bind(this);
+                }
+
+                if(this.getConfigurations.highlightPiece) {
+                    cfg.onMoveEnd = this.onMoveEnd;
+                }
+
+                const currentBoard = {
+                    boardObject: ChessBoard('kataBoard', cfg),
+                    boardElement: $('#kataBoard'),
+                    boardId: 'kataBoard'
+                }
+
+                this.$store.dispatch('updateCurrentBoard', currentBoard);
                 this.getCurrentGame.load(this.currentKata.fen);
                 this.updateStatus();
             },
@@ -163,6 +196,14 @@
                 this.kataTotal = 0;
                 this.nextKata = false;
                 this.nextLevel = false;
+            },
+            onMoveEnd() {
+                this.getCurrentBoard.boardElement.find('.square-' + this.squareToHighlight)
+                    .addClass('highlight-black');
+            },
+            removeHighlights(color) {
+                this.getCurrentBoard.boardElement.find('.square-55d63')
+                    .removeClass('highlight-' + color);
             }
         },
         computed: {
@@ -180,10 +221,15 @@
             },
             getCurrentGame() {
                 return this.$store.getters.getCurrentGame;
+            },
+            getConfigurations() {
+                return this.$store.getters.getConfigurations;
             }
         },
-        mounted() {
+        created() {
             this.clearValues();
+        },
+        mounted() {
             this.loadBoard();
         }
     }

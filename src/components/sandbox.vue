@@ -1,7 +1,7 @@
 <template>
     <div>
         <router-link to="/">Dashboard</router-link>
-        <div id="board" style="width: 400px"></div>
+        <div id="sandboxBoard" style="width: 400px"></div>
         <historyTable :status="status" :pgn="pgn"></historyTable>
     </div>
 </template>
@@ -19,7 +19,8 @@
         data() {
             return {
                 status: '',
-                pgn: ''
+                pgn: '',
+                squareToHighlight: {}
             }
         },
         computed: {
@@ -28,6 +29,9 @@
             },
             getCurrentGame() {
                 return this.$store.getters.getCurrentGame;
+            },
+            getConfigurations() {
+                return this.$store.getters.getConfigurations;
             }
         },
         methods: {
@@ -41,6 +45,8 @@
                 }
             },            
             onDrop(source, target) {
+                if(this.getConfigurations.highlightLegalMoves) chessTainerHelper.removeGreySquares(this.getCurrentBoard.boardId);
+
                 // see if the move is legal
                 var move = this.getCurrentGame.move({
                     from: source,
@@ -52,6 +58,21 @@
                 if (move === null) return 'snapback';
 
                 chessTainerHelper.updateStatus.call(this);
+
+                if(this.getConfigurations.highlightPiece) {
+                    // highlight white's move
+                    this.removeHighlights('white');
+                    this.getCurrentBoard.boardElement.find('.square-' + source).addClass('highlight-white');
+                    this.getCurrentBoard.boardElement.find('.square-' + target).addClass('highlight-white');
+                }
+            },
+            onMoveEnd() {
+                this.getCurrentBoard.boardElement.find('.square-' + this.squareToHighlight)
+                    .addClass('highlight-black');
+            },
+            removeHighlights(color) {
+                this.getCurrentBoard.boardElement.find('.square-55d63')
+                    .removeClass('highlight-' + color);
             }
         },
         created() {
@@ -66,7 +87,22 @@
                 onSnapEnd: chessTainerHelper.onSnapEnd.bind(this)
             };
 
-            this.$store.dispatch('updateCurrentBoard', ChessBoard('board', cfg));
+            if(this.getConfigurations.highlightLegalMoves) {
+                cfg.onMouseoutSquare = chessTainerHelper.onMouseoutSquare.bind(this);
+                cfg.onMouseoverSquare = chessTainerHelper.onMouseoverSquare.bind(this);
+            }
+
+            if(this.getConfigurations.highlightPiece) {
+                cfg.onMoveEnd = this.onMoveEnd;
+            }
+            
+            const currentBoard = {
+                boardObject: ChessBoard('sandboxBoard', cfg),
+                boardElement: $('#sandboxBoard'),
+                boardId: 'sandboxBoard'
+            }
+
+            this.$store.dispatch('updateCurrentBoard', currentBoard);
             chessTainerHelper.updateStatus.call(this);
         }
     }

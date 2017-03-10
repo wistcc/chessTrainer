@@ -2,7 +2,7 @@
     <div>
         <router-link to="/">Dashboard</router-link>
         <h1>Settings</h1>
-        <input type="checkbox" v-model="configurations.validateLegalMoves">Validate legal moves</input>
+        <input type="checkbox" v-model="configurations.validateLegalMoves">Validate legal moves (on sandbox)</input>
         <input type="checkbox" v-model="configurations.highlightLegalMoves">Highlight legal moves</input>
         <input type="checkbox" v-model="configurations.highlightPiece">Piece highlighting</input>
     </div>

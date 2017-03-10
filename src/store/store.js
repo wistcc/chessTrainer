@@ -16,12 +16,16 @@ const state = {
         currentKata: chessTrainer.currentKata || 0,
         configurations: {
             validateLegalMoves: chessTrainer.configurations.validateLegalMoves || true,
-            highlightLegalMoves: chessTrainer.configurations.highlightLegalMoves || false,
-            highlightPiece: chessTrainer.configurations.highlightPiece || false
+            highlightLegalMoves: chessTrainer.configurations.highlightLegalMoves || true,
+            highlightPiece: chessTrainer.configurations.highlightPiece || true
         }
     },
     currentGame: {},
-    currentBoard: {}
+    currentBoard: {
+        boardObject: {},
+        boardElement: {},
+        boardId: ''
+    }
 }
 
 const mutations = {
@@ -48,11 +52,11 @@ const mutations = {
     },
     UNDO_MOVE (state, playingWithComputer) {
         state.currentGame.undo();
-        state.currentBoard.position(state.currentGame.fen());
+        state.currentBoard.boardObject.position(state.currentGame.fen());
 
         if(playingWithComputer){
             state.currentGame.undo();
-            state.currentBoard.position(state.currentGame.fen());
+            state.currentBoard.boardObject.position(state.currentGame.fen());
         }
     }
 }
@@ -84,7 +88,9 @@ const getters = {
     getCurrentKata: state => state.chessTrainer.currentKata,
     getConfigurations: state => state.chessTrainer.configurations,
     getCurrentGame: state => state.currentGame,
-    getCurrentBoard: state => state.currentBoard
+    getCurrentBoard: state => state.currentBoard,
+    getCurrentBoardElement: state => state.currentBoardElement,
+    getCurrentBoardId: state => state.currentBoardId
 }
 
 export default new Vuex.Store({
