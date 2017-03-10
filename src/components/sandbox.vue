@@ -20,7 +20,7 @@
             return {
                 status: '',
                 pgn: '',
-                squareToHighlight: {}
+                squareToHighlight: ''
             }
         },
         computed: {
@@ -60,15 +60,19 @@
                 chessTainerHelper.updateStatus.call(this);
 
                 if(this.getConfigurations.highlightPiece) {
-                    // highlight white's move
-                    this.removeHighlights('white');
-                    this.getCurrentBoard.boardElement.find('.square-' + source).addClass('highlight-white');
-                    this.getCurrentBoard.boardElement.find('.square-' + target).addClass('highlight-white');
+                    if(this.getCurrentGame.turn() === 'w'){
+                        // highlight balck's move
+                        this.removeHighlights('black');
+                        this.getCurrentBoard.boardElement.find('.square-' + source).addClass('highlight-black');
+                        this.getCurrentBoard.boardElement.find('.square-' + target).addClass('highlight-black');
+                    }
+                    else {
+                        // highlight white's move
+                        this.removeHighlights('white');
+                        this.getCurrentBoard.boardElement.find('.square-' + source).addClass('highlight-white');
+                        this.getCurrentBoard.boardElement.find('.square-' + target).addClass('highlight-white');
+                    }
                 }
-            },
-            onMoveEnd() {
-                this.getCurrentBoard.boardElement.find('.square-' + this.squareToHighlight)
-                    .addClass('highlight-black');
             },
             removeHighlights(color) {
                 this.getCurrentBoard.boardElement.find('.square-55d63')
@@ -82,18 +86,21 @@
             var cfg = {
                 draggable: true,
                 position: 'start',
-                onDragStart: this.onDragStart,
-                onDrop: this.onDrop,
-                onSnapEnd: chessTainerHelper.onSnapEnd.bind(this)
+                //onSnapEnd: chessTainerHelper.onSnapEnd.bind(this)
             };
+
+            if(this.getConfigurations.validateLegalMoves) {
+                cfg.onDragStart = this.onDragStart;
+                cfg.onDrop = this.onDrop;
+            }
+
+            if(this.getConfigurations.trashPiece) {
+                cfg.dropOffBoard = 'trash';
+            }
 
             if(this.getConfigurations.highlightLegalMoves) {
                 cfg.onMouseoutSquare = chessTainerHelper.onMouseoutSquare.bind(this);
                 cfg.onMouseoverSquare = chessTainerHelper.onMouseoverSquare.bind(this);
-            }
-
-            if(this.getConfigurations.highlightPiece) {
-                cfg.onMoveEnd = this.onMoveEnd;
             }
             
             const currentBoard = {

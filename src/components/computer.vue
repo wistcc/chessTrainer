@@ -20,7 +20,7 @@
             return {
                 status: '',
                 pgn: '',
-                squareToHighlight: {}
+                squareToHighlight: ''
             }
         },
         computed: {

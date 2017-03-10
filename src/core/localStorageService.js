@@ -5,8 +5,9 @@ const emptyChessTrainer = {
     currentKata: 0,
     configurations: {
         validateLegalMoves: true,
-        highlightLegalMoves: false,
-        highlightPiece: false
+        trashPiece: true,
+        highlightLegalMoves: true,
+        highlightPiece: true
     }
 }
 

@@ -37,7 +37,7 @@
                 kataTotal: 0,
                 nextKata: false,
                 nextLevel: false,
-                squareToHighlight: {}
+                squareToHighlight: ''
             }
         },
         methods: {

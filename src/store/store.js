@@ -11,13 +11,14 @@ let updateLocalStorage = function() {
 
 const state = {
     chessTrainer: {
-        points: chessTrainer.points || 0,
-        currentLevel: chessTrainer.currentLevel || 0,
-        currentKata: chessTrainer.currentKata || 0,
+        points: chessTrainer.points,
+        currentLevel: chessTrainer.currentLevel,
+        currentKata: chessTrainer.currentKata,
         configurations: {
-            validateLegalMoves: chessTrainer.configurations.validateLegalMoves || true,
-            highlightLegalMoves: chessTrainer.configurations.highlightLegalMoves || true,
-            highlightPiece: chessTrainer.configurations.highlightPiece || true
+            validateLegalMoves: chessTrainer.configurations.validateLegalMoves,
+            trashPiece: chessTrainer.configurations.trashPiece,
+            highlightLegalMoves: chessTrainer.configurations.highlightLegalMoves,
+            highlightPiece: chessTrainer.configurations.highlightPiece
         }
     },
     currentGame: {},
@@ -41,7 +42,14 @@ const mutations = {
         updateLocalStorage();
     },
     UPDATE_CONFIGURATIONS (state, configurations) {
-        state.chessTrainer.configurations = configurations;
+        if(!configurations.validateLegalMoves) {
+            state.chessTrainer.configurations.highlightLegalMoves = false;
+            state.chessTrainer.configurations.highlightPiece = false;
+        }
+        else {
+            state.chessTrainer.configurations.trashPiece = false;
+            state.chessTrainer.configurations = configurations;
+        }
         updateLocalStorage();
     },
     UPDATE_CURRENT_GAME (state, currentGame) {
