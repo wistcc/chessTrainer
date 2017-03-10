@@ -25,20 +25,35 @@ const state = {
 }
 
 const mutations = {
-    UPDATE_KATA (state, kataIndex){
+    UPDATE_KATA (state, kataIndex) {
         state.chessTrainer.currentKata = kataIndex;
         state.chessTrainer.points += 10;
         updateLocalStorage();
     },
-    UPDATE_LEVEL (state, levelIndex){
+    UPDATE_LEVEL (state, levelIndex) {
         state.chessTrainer.currentLevel = levelIndex;
         state.chessTrainer.points += 60;
         state.chessTrainer.currentKata = 0;
         updateLocalStorage();
     },
-    UPDATE_CONFIGURATIONS (state, configurations){
+    UPDATE_CONFIGURATIONS (state, configurations) {
         state.chessTrainer.configurations = configurations;
         updateLocalStorage();
+    },
+    UPDATE_CURRENT_GAME (state, currentGame) {
+        state.currentGame = currentGame;
+    },
+    UPDATE_CURRENT_BOARD (state, currentBoard) {
+        state.currentBoard = currentBoard;
+    },
+    UNDO_MOVE (state, playingWithComputer) {
+        state.currentGame.undo();
+        state.currentBoard.position(state.currentGame.fen());
+
+        if(playingWithComputer){
+            state.currentGame.undo();
+            state.currentBoard.position(state.currentGame.fen());
+        }
     }
 }
 
@@ -51,6 +66,15 @@ const actions = {
     },
     updateConfigurations ({ commit }, configurations) {
         commit('UPDATE_CONFIGURATIONS', configurations);
+    },
+    updateCurrentGame ({ commit }, currentGame) {
+        commit('UPDATE_CURRENT_GAME', currentGame);
+    },
+    updateCurrentBoard ({ commit }, currentBoard) {
+        commit('UPDATE_CURRENT_BOARD', currentBoard);
+    },
+    undoMove ({ commit }, playingWithComputer) {
+        commit('UNDO_MOVE', playingWithComputer);
     }
 }
 

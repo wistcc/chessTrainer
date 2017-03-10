@@ -1,24 +1,24 @@
 let onSnapEnd = function () {
     // update the board position after the piece snap
     // for castling, en passant, pawn promotion
-    this.board.position(this.game.fen());
+    this.getCurrentBoard.position(this.getCurrentGame.fen());
 }
 
 let updateStatus = function() {
     var status = '';
 
     var moveColor = 'White';
-    if (this.game.turn() === 'b') {
+    if (this.getCurrentGame.turn() === 'b') {
         moveColor = 'Black';
     }
 
     // checkmate?
-    if (this.game.in_checkmate() === true) {
+    if (this.getCurrentGame.in_checkmate() === true) {
         status = 'Game over, ' + moveColor + ' is in checkmate.';
     }
 
     // draw?
-    else if (this.game.in_draw() === true) {
+    else if (this.getCurrentGame.in_draw() === true) {
         status = 'Game over, drawn position';
     }
 
@@ -27,14 +27,14 @@ let updateStatus = function() {
         status = moveColor + ' to move';
 
         // check?
-        if (this.game.in_check() === true) {
+        if (this.getCurrentGame.in_check() === true) {
             status += ', ' + moveColor + ' is in check';
         }
     }
 
     //statusEl.html(status);
     this.status = status;
-    this.pgn = this.game.pgn();
+    this.pgn = this.getCurrentGame.pgn();
 }
 
 export default {

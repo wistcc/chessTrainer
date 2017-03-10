@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import chessTainerService from 'core/chessTainerService';
+    import chessTainerHelper from 'core/chessTainerHelper';
     import historyTable from 'components/historyTable';
     import ChessBoard from 'chessboardjs';
     import chess from 'chess.js';
@@ -18,24 +18,31 @@
         },
         data() {
             return {
-                game: new chess(),
                 status: '',
                 pgn: ''
+            }
+        },
+        computed: {
+            getCurrentBoard() {
+                return this.$store.getters.getCurrentBoard;
+            },
+            getCurrentGame() {
+                return this.$store.getters.getCurrentGame;
             }
         },
         methods: {
             onDragStart(source, piece, position, orientation) {
                 // do not pick up pieces if the game is over
                 // only pick up pieces for White
-                if (this.game.game_over() === true ||
-                    (this.game.turn() === 'w' && piece.search(/^b/) !== -1) ||
-                    (this.game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+                if (this.getCurrentGame.game_over() === true ||
+                    (this.getCurrentGame.turn() === 'w' && piece.search(/^b/) !== -1) ||
+                    (this.getCurrentGame.turn() === 'b' && piece.search(/^w/) !== -1)) {
                     return false;
                 }
             },            
             onDrop(source, target) {
                 // see if the move is legal
-                var move = this.game.move({
+                var move = this.getCurrentGame.move({
                     from: source,
                     to: target,
                     promotion: 'q' // NOTE: always promote to a queen for example simplicity
@@ -44,8 +51,11 @@
                 // illegal move
                 if (move === null) return 'snapback';
 
-                chessTainerService.updateStatus.call(this);
+                chessTainerHelper.updateStatus.call(this);
             }
+        },
+        created() {
+            this.$store.dispatch('updateCurrentGame', new chess());
         },
         mounted(){
             var cfg = {
@@ -53,11 +63,11 @@
                 position: 'start',
                 onDragStart: this.onDragStart,
                 onDrop: this.onDrop,
-                onSnapEnd: chessTainerService.onSnapEnd.bind(this)
+                onSnapEnd: chessTainerHelper.onSnapEnd.bind(this)
             };
 
-            this.board = ChessBoard('board', cfg);
-            chessTainerService.updateStatus.call(this);
+            this.$store.dispatch('updateCurrentBoard', ChessBoard('board', cfg));
+            chessTainerHelper.updateStatus.call(this);
         }
     }
 

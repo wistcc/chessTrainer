@@ -12,12 +12,12 @@
         </span>
         <h1>Kata {{kataIndex + 1}}/{{kataTotal}} for {{level.name}}</h1>
         <div id="board" style="width: 400px"></div>
-        <historyTable :status="status" :description="currentKata.description"></historyTable>
+        <historyTable :status="status" :description="currentKata.description" :showUndoMove="false"></historyTable>
     </div>
 </template>
 
 <script>
-    import chessTainerService from 'core/chessTainerService';
+    import chessTainerHelper from 'core/chessTainerHelper';
     import historyTable from 'components/historyTable';
     import katas from 'data/katas';
     import ChessBoard from 'chessboardjs';
@@ -29,7 +29,6 @@
         },
         data() {
             return {
-                game: new chess(),
                 currentKata: {},
                 status: '',
                 levelIndex: 0,
@@ -44,9 +43,9 @@
             onDragStart(source, piece, position, orientation) {
                 // do not pick up pieces if the game is over
                 // only pick up pieces for the side to move
-                if (this.game.game_over() === true ||
-                    (this.game.turn() === 'w' && piece.search(/^b/) !== -1) ||
-                    (this.game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+                if (this.getCurrentGame.game_over() === true ||
+                    (this.getCurrentGame.turn() === 'w' && piece.search(/^b/) !== -1) ||
+                    (this.getCurrentGame.turn() === 'b' && piece.search(/^w/) !== -1)) {
                     return false;
                 }
             },
@@ -54,14 +53,14 @@
                 // game over
                 if (this.currentKata.computerMoves[this.currentKata.currentMove] === null) return;
 
-                this.game.move(this.currentKata.computerMoves[this.currentKata.currentMove]);
-                this.board.position(this.game.fen());
+                this.getCurrentGame.move(this.currentKata.computerMoves[this.currentKata.currentMove]);
+                this.getCurrentBoard.position(this.getCurrentGame.fen());
                 this.currentKata.currentMove++;
                 this.updateStatus();
             },
             onDrop(source, target) {
                 // see if the move is legal
-                var move = this.game.move({
+                var move = this.getCurrentGame.move({
                     from: source,
                     to: target,
                     promotion: 'q' // NOTE: always promote to a queen for example simplicity
@@ -71,7 +70,7 @@
                 if (move === null) return 'snapback';
                 
                 if(move.san !== this.currentKata.userMoves[this.currentKata.currentMove]){
-                    this.game.undo();
+                    this.getCurrentGame.undo();
                     return 'snapback';
                 }
 
@@ -84,17 +83,17 @@
                 var status = '';
 
                 var moveColor = 'White';
-                if (this.game.turn() === 'b') {
+                if (this.getCurrentGame.turn() === 'b') {
                     moveColor = 'Black';
                 }
 
                 // checkmate?
-                if (this.game.in_checkmate() === true) {
+                if (this.getCurrentGame.in_checkmate() === true) {
                     status = 'Game over, ' + moveColor + ' is in checkmate.';
                 }
 
                 // draw?
-                else if (this.game.in_draw() === true) {
+                else if (this.getCurrentGame.in_draw() === true) {
                     status = 'Game over, drawn position';
                 }
 
@@ -103,7 +102,7 @@
                     status = moveColor + ' to move';
 
                     // check?
-                    if (this.game.in_check() === true) {
+                    if (this.getCurrentGame.in_check() === true) {
                         status += ', ' + moveColor + ' is in check';
                     }
                 }
@@ -129,11 +128,11 @@
                     position: this.currentKata.fen,
                     onDragStart: this.onDragStart,
                     onDrop: this.onDrop,
-                    onSnapEnd: chessTainerService.onSnapEnd.bind(this)
+                    onSnapEnd: chessTainerHelper.onSnapEnd.bind(this)
                 };
 
-                this.board = ChessBoard('board', cfg);
-                this.game.load(this.currentKata.fen);
+                this.$store.dispatch('updateCurrentBoard', ChessBoard('board', cfg));
+                this.getCurrentGame.load(this.currentKata.fen);
                 this.updateStatus();
             },
             goNextKata() {
@@ -157,7 +156,7 @@
             clearValues() {
                 this.levelIndex = this.$route.params.levelIndex >= 0 ? parseInt(this.$route.params.levelIndex) : this.getCurrentLevel;
                 this.kataIndex = this.$route.params.kataIndex >= 0 ? parseInt(this.$route.params.kataIndex) : this.getCurrentKata;
-                this.game = new chess();
+                this.$store.dispatch('updateCurrentGame', new chess());
                 this.currentKata = {};
                 this.status = '';
                 this.level = {};
@@ -175,6 +174,12 @@
             },
             getCurrentKata(){
                 return this.$store.getters.getCurrentKata;
+            },
+            getCurrentBoard() {
+                return this.$store.getters.getCurrentBoard;
+            },
+            getCurrentGame() {
+                return this.$store.getters.getCurrentGame;
             }
         },
         mounted() {
