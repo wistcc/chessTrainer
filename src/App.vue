@@ -33,7 +33,7 @@
             <li><router-link to="configurations">Settings</router-link></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-              <li><a id="greetings"><i class="glyphicon glyphicon-flash"></i> {{getPoints}}</a></li>
+              <li><a id="greetings"><span v-if="configurations.name"> Hi {{configurations.name}}!</span> <i class="glyphicon glyphicon-flash"></i> {{getPoints}}</a></li>
           </ul>
         </div>
       </div>
@@ -59,6 +59,9 @@
           },
           getCurrentKata(){
               return this.$store.getters.getCurrentKata;
+          },
+          configurations() {
+              return this.$store.getters.getConfigurations;
           }
       }
     }

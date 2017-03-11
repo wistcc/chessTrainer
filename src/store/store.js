@@ -18,7 +18,8 @@ const state = {
             validateLegalMoves: chessTrainer.configurations.validateLegalMoves,
             trashPiece: chessTrainer.configurations.trashPiece,
             highlightLegalMoves: chessTrainer.configurations.highlightLegalMoves,
-            highlightPiece: chessTrainer.configurations.highlightPiece
+            highlightPiece: chessTrainer.configurations.highlightPiece,
+            name: chessTrainer.configurations.name
         }
     },
     currentGame: {},

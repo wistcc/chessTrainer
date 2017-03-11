@@ -7,7 +7,8 @@ const emptyChessTrainer = {
         validateLegalMoves: true,
         trashPiece: false,
         highlightLegalMoves: true,
-        highlightPiece: true
+        highlightPiece: true,
+        name: ''
     }
 }
 
