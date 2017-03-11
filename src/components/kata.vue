@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-md-12">        
+        <div class="col-md-12 infoDiv">        
             <div v-if="!isInCurrentKata" @click="goCurrentKata" class="alert alert-info text-center clickableDiv">
                 <i class="glyphicon glyphicon-info-sign"></i> Keep on tack, go to your current Kata
             </div>
@@ -24,12 +24,10 @@
             </div>
         </div>
         <div class="col-md-6">
-            <h3>Kata {{kataIndex + 1}}/{{kataTotal}} for {{level.name}}</h3>
-            <h3>{{currentKata.description}}</h3>
             <div id="kataBoard" style="width: 400px"></div>        
         </div>
         <div class="col-md-6">
-            <historyTable :status="status" :showUndoMove="false"></historyTable>
+            <historyTable :status="status" :title="getTitle" :description="currentKata.description" :showUndoMove="false"></historyTable>
         </div>
     </div>
 </template>
@@ -242,6 +240,9 @@
             },
             getConfigurations() {
                 return this.$store.getters.getConfigurations;
+            },
+            getTitle() {
+                return 'Kata ' + (this.kataIndex + 1) + '/' + this.kataTotal + ' for ' + this.level.name;
             }
         },
         created() {
