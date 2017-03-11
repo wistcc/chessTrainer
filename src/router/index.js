@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import dashboard from 'components/dashboard';
+import index from 'components/index';
 import kataList from 'components/kataList';
 import kata from 'components/kata';
 import computer from 'components/computer';
@@ -13,8 +13,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'dashboard',
-      component: dashboard
+      name: 'index',
+      component: index
     },
     {
       path: '/kataList',

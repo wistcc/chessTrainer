@@ -1,6 +1,8 @@
 <template>
     <div class="row">
-        <router-link to="/">Dashboard</router-link>
+        <div class="col-md-12">
+            <h2 class="text-primary">{{levelName}}'s katas</h2>
+        </div>
         <div class="col-md-4" v-for="(kata, index) in kataList">
             <span v-if="getCurrentLevel > levelIndex || getCurrentKata >= index">
                 <h3>{{kata.description}}</h3>
@@ -24,7 +26,8 @@
         data() {
             return {
                 levelIndex: this.$route.query.levelIndex,
-                kataList: {}
+                kataList: {},
+                levelName: ''
             }
         },
         computed: {
@@ -36,6 +39,7 @@
             }
         },
         created(){
+            this.levelName = katas.levels[this.levelIndex].name;
             this.kataList = katas.levels[this.levelIndex].katas;
         },
         mounted() {

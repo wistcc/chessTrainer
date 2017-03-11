@@ -48,8 +48,9 @@ const mutations = {
         }
         else {
             state.chessTrainer.configurations.trashPiece = false;
-            state.chessTrainer.configurations = configurations;
         }
+        
+        state.chessTrainer.configurations = configurations;
         updateLocalStorage();
     },
     UPDATE_CURRENT_GAME (state, currentGame) {

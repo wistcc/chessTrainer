@@ -1,18 +1,36 @@
 <template>
-    <div>
-        <router-link :to="{ name: 'kataList', query: {levelIndex: levelIndex}}">Katas list</router-link>
-        <span v-if="nextKata">
-            <button @click="goNextKata">Next Kata</button>
-        </span>
-        <span v-if="nextLevel">
-            <button @click="goNextLevel">Next Level</button>
-        </span>
-        <span v-if="!isInCurrentKata">
-            <button @click="goCurrentKata">Keep on tack, go to your current Kata</button>
-        </span>
-        <h1>Kata {{kataIndex + 1}}/{{kataTotal}} for {{level.name}}</h1>
-        <div id="kataBoard" style="width: 400px"></div>
-        <historyTable :status="status" :description="currentKata.description" :showUndoMove="false"></historyTable>
+    <div class="row">
+        <div class="col-md-12">        
+            <div v-if="!isInCurrentKata" @click="goCurrentKata" class="alert alert-info text-center clickableDiv">
+                <i class="glyphicon glyphicon-info-sign"></i> Keep on tack, go to your current Kata
+            </div>
+            <router-link class="btn btn-default" :to="{ name: 'kataList', query: {levelIndex: levelIndex}}"><i class="glyphicon glyphicon-menu-left"></i> Back to list</router-link>
+            
+            <div class="nextKataDiv text-center" v-if="nextKata">
+                <div>
+                    <h2>Congratulations you have finished this kata!</h2>
+                    <button class="btn btn-success" @click="goNextKata">Go to the next Kata</button>
+                </div>
+            </div>
+
+            <div class="nextLevelDiv text-center" v-if="nextLevel">
+                <div>
+                    <h2>Congratulations you have finished this level!</h2>
+                    <button class="btn btn-success" @click="goNextLevel">Go to the next level</button>
+                </div>
+            </div>
+
+            <div v-bind:class="{ nextStepKataDiv: nextKata, nextStepLevelDiv: nextLevel }" v-if="nextKata || nextLevel">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Kata {{kataIndex + 1}}/{{kataTotal}} for {{level.name}}</h3>
+            <h3>{{currentKata.description}}</h3>
+            <div id="kataBoard" style="width: 400px"></div>        
+        </div>
+        <div class="col-md-6">
+            <historyTable :status="status" :showUndoMove="false"></historyTable>
+        </div>
     </div>
 </template>
 
@@ -235,3 +253,62 @@
     }
 
 </script>
+
+<style>
+    .clickableDiv {
+        cursor: pointer;
+    }
+    .infoDiv {
+        margin-bottom: 10px;
+    }
+    .nextStepKataDiv {
+        background-color: #bce8f1;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top:0;
+        left:0;
+        bottom:0;
+        right:0;
+        z-index: 9998;
+        opacity: 0.8;
+    }
+    .nextStepLevelDiv {
+        background-color: #d6e9c6;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top:0;
+        left:0;
+        bottom:0;
+        right:0;
+        z-index: 9998;
+        opacity: 0.8;
+    }
+    .nextKataDiv {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top:0;
+        left:0;
+        bottom:0;
+        right:0;
+        z-index: 9999;
+    }    
+    .nextKataDiv div {
+        margin-top: 20%;
+    }
+    .nextLevelDiv {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top:0;
+        left:0;
+        bottom:0;
+        right:0;
+        z-index: 9999;
+    }
+    .nextLevelDiv div {
+        margin-top: 20%;
+    }
+</style>

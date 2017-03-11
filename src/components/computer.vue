@@ -1,8 +1,12 @@
 <template>
     <div>
-        <router-link to="/">Dashboard</router-link>
-        <div id="computerBoard" style="width: 400px"></div>
-        <historyTable :status="status" :pgn="pgn" :playingWithComputer="true"></historyTable>
+        <div class="col-md-12">
+            <h2 class="text-primary">Playing versus computer</h2>
+        </div>
+        <div class="col-md-12">
+            <div id="computerBoard" style="width: 400px"></div>
+            <historyTable :status="status" :pgn="pgn" :playingWithComputer="true" :showUndoMove="true"></historyTable>
+        </div>
     </div>
 </template>
 

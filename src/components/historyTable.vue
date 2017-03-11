@@ -1,16 +1,13 @@
 <template>
-    <div class="container">
-        <div class="row" v-if="description">
-            <h1>{{description}}</h1>
-        </div>
+    <div>
         <div class="row">
-            <h1>Status: {{status}}</h1>
+            <h3>Status: {{status}}</h3>
         </div>
-        <div class="row" v-if="showUndoMoveButton">
+        <div class="row" v-if="showUndoMove">
             <button @click="undoMove">Undo move</button>
         </div>
         <div class="row" v-if="pgn">
-            <h1>PGN</h1>
+            <h3>PGN</h3>
             <span>{{pgn}}</span>
         </div>
     </div>
@@ -18,12 +15,7 @@
 
 <script>
     export default {
-        props: ['status', 'pgn', 'description', 'playingWithComputer', "showUndoMove"],
-        data() {
-            return {
-                showUndoMoveButton: this.showUndoMove || true
-            }
-        },
+        props: ['status', 'pgn', 'playingWithComputer', "showUndoMove"],
         methods: {
             undoMove() {
                 this.$store.dispatch('undoMove', this.playingWithComputer || false);

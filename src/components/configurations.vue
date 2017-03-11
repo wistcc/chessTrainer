@@ -1,11 +1,44 @@
 <template>
     <div>
-        <router-link to="/">Dashboard</router-link>
-        <h1>Settings</h1>
-        <input type="checkbox" v-model="configurations.validateLegalMoves" @click="updateConfigurations">Validate legal moves (on sandbox)</input>
-        <input type="checkbox" v-model="configurations.trashPiece" :disabled="configurations.validateLegalMoves" @click="updateConfigurations">Remove pieces when they are dropped outside the board (on sandbox)</input>
-        <input type="checkbox" v-model="configurations.highlightLegalMoves" :disabled="!configurations.validateLegalMoves" @click="updateConfigurations">Highlight legal moves</input>
-        <input type="checkbox" v-model="configurations.highlightPiece" :disabled="!configurations.validateLegalMoves" @click="updateConfigurations">Piece highlighting</input>
+        <h1 class="text-primary">Settings</h1>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                        <input type="checkbox" v-model="configurations.validateLegalMoves" @click="updateConfigurations"> Validate legal moves (on sandbox)
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                        <input type="checkbox" v-model="configurations.trashPiece" :disabled="configurations.validateLegalMoves" @click="updateConfigurations">Remove pieces when they are dropped outside the board (on sandbox)
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                        <input type="checkbox" v-model="configurations.highlightLegalMoves" :disabled="!configurations.validateLegalMoves" @click="updateConfigurations">Highlight legal moves
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                        <input type="checkbox"v-model="configurations.highlightPiece" :disabled="!configurations.validateLegalMoves" @click="updateConfigurations">Piece highlighting
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </template>
 

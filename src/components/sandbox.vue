@@ -1,8 +1,12 @@
 <template>
     <div>
-        <router-link to="/">Dashboard</router-link>
-        <div id="sandboxBoard" style="width: 400px"></div>
-        <historyTable :status="status" :pgn="pgn"></historyTable>
+        <div class="col-md-12">
+            <h2 class="text-primary">Sandbox</h2>
+        </div>
+        <div class="col-md-12">
+            <div id="sandboxBoard" style="width: 400px"></div>
+            <historyTable :status="status" :pgn="pgn" :showUndoMove="false"></historyTable>
+        </div>
     </div>
 </template>
 
