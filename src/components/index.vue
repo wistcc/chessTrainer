@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="header" class="row">
-            <img src="/assets/wK.png" alt="Black King">
+            <img src="../assets/wK.png" alt="Black King">
             <h1>Chess Trainer</h1>
             <h3>Learn chess by practicing it.</h3>
         </div>
@@ -53,7 +53,7 @@
 
 <style>
     #header {
-        background-image: url('/assets/header.jpg');
+        background-image: url('../assets/header.jpg');
         height: 420px;
         margin: 0px auto;
         padding-top: 118px;
@@ -62,7 +62,7 @@
         margin-bottom: 100px;
     }
     #quote {
-        background-image: url('/assets/quote.jpg');
+        background-image: url('../assets/quote.jpg');
         height: 300px;
         margin: 0px auto;
         padding-top: 90px;
