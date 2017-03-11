@@ -80,6 +80,8 @@
                 if (!this.currentKata.computerMoves[this.currentKata.currentMove]) return;
 
                 var move = this.getCurrentGame.move(this.currentKata.computerMoves[this.currentKata.currentMove]);
+                console.log(this.currentKata.computerMoves[this.currentKata.currentMove])
+                console.log(move)
                 this.getCurrentBoard.boardObject.position(this.getCurrentGame.fen());
                 this.currentKata.currentMove++;
                 

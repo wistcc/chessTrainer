@@ -4,7 +4,7 @@
             <div id="sandboxBoard" style="width: 400px"></div>
         </div>
         <div class="col-md-6">
-            <historyTable :status="status" title="Sandbox" :pgn="pgn" :showUndoMove="false"></historyTable>
+            <historyTable :status="status" title="Sandbox" :pgn="pgn" :showUndoMove="getConfigurations.validateLegalMoves"></historyTable>
         </div>
     </div>
 </template>
