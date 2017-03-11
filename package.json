@@ -10,7 +10,6 @@
     "lint": "eslint build config src"
   },
   "dependencies": {
-    "bootstrap": "^3.3.7",
     "chess.js": "^0.10.2",
     "chessboardjs": "0.0.1",
     "jquery": "^3.1.1",

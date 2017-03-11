@@ -31,17 +31,6 @@ module.exports = merge(baseWebpackConfig, {
         template: 'index.html',
         inject: true
       }),
-      new FriendlyErrorsPlugin(),
-      new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery"
-      }),
-      new CopyWebpackPlugin([
-        { 
-          from: 'src/assets/',
-          to: 'assets/'
-        }
-      ]),
       new CopyWebpackPlugin([
         { 
           from: 'node_modules/chessboardjs/www/img/',
