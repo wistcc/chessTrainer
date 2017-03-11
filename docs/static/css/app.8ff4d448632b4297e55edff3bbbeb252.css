@@ -5,6 +5,91 @@
 .highlight-black {
   box-shadow: inset 0 0 3px 3px blue;
 }
+#greetings {
+  font-weight: bold;
+}
+#greetings:hover {
+  color: #777;
+}
+footer {
+  text-align: center;
+}
+
+#header {
+    background-image: url(./static/img/header.b2af383.jpg);
+    height: 420px;
+    margin: 0px auto;
+    padding-top: 118px;
+    text-align: center;
+    color: white;
+    margin-bottom: 100px;
+}
+#quote {
+    background-image: url(./static/img/quote.451c622.jpg);
+    height: 300px;
+    margin: 0px auto;
+    padding-top: 90px;
+    text-align: center;
+    color: white;
+    margin-top: 100px;
+}
+
+.clickableDiv {
+    cursor: pointer;
+}
+.infoDiv {
+    margin-bottom: 10px;
+}
+.nextStepKataDiv {
+    background-color: #bce8f1;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    z-index: 9998;
+    opacity: 0.8;
+}
+.nextStepLevelDiv {
+    background-color: #d6e9c6;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    z-index: 9998;
+    opacity: 0.8;
+}
+.nextKataDiv {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    z-index: 9999;
+}
+.nextKataDiv div {
+    margin-top: 20%;
+}
+.nextLevelDiv {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    z-index: 9999;
+}
+.nextLevelDiv div {
+    margin-top: 20%;
+}
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -6833,4 +6918,4 @@ button.close {
   top: 2px;
   left: 2px;
 }
-/*# sourceMappingURL=app.96c40137e3bd8a6c886347b607ff79b4.css.map*/
+/*# sourceMappingURL=app.8ff4d448632b4297e55edff3bbbeb252.css.map*/

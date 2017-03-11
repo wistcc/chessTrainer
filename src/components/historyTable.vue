@@ -6,7 +6,7 @@
             <h3>Status: {{status}}</h3>
         </div>
         <div class="row" v-if="showUndoMove">
-            <button class="btn btn-warning" @click="undoMove">Undo move</button>
+            <button class="btn btn-warning" @click="undoMove"><i class="glyphicon glyphicon-menu-left"></i>Undo move</button>
         </div>
         <div class="row" v-if="pgn">
             <h3>PGN</h3>

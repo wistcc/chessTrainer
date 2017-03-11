@@ -1,44 +1,51 @@
 <template>
-  <div class="container">
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Chess Trainer</a>
-        </div>
+  <div>    
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Chess Trainer</a>
+          </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li>
-                <router-link :to="{ name: 'kata', params: {levelIndex: getCurrentLevel, kataIndex: getCurrentKata}}">
-                    Current Kata
-                </router-link>
-            </li>
-            <li><router-link to="computer">VS Computer</router-link></li>
-            <li><router-link to="sandbox">Sandbox</router-link></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kata list <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                  <li v-for="(level, index) in levels">
-                      <router-link v-if="getCurrentLevel >= index" :to="{ name: 'kataList', query: {levelIndex: index}}">{{level.name}}</router-link>
-                      <a v-else>{{level.name}} (BLOCKED)</a>
-                </li>
-              </ul>
-            </li>
-            <li><router-link to="configurations">Settings</router-link></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-              <li><a id="greetings"><span v-if="configurations.name"> Hi {{configurations.name}}!</span> <i class="glyphicon glyphicon-flash"></i> {{getPoints}}</a></li>
-          </ul>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li>
+                  <router-link :to="{ name: 'kata', params: {levelIndex: getCurrentLevel, kataIndex: getCurrentKata}}">
+                      Current Kata
+                  </router-link>
+              </li>
+              <li><router-link to="computer">VS Computer</router-link></li>
+              <li><router-link to="sandbox">Sandbox</router-link></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kata list <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li v-for="(level, index) in levels">
+                        <router-link v-if="getCurrentLevel >= index" :to="{ name: 'kataList', query: {levelIndex: index}}">{{level.name}}</router-link>
+                        <a v-else>{{level.name}} (BLOCKED)</a>
+                  </li>
+                </ul>
+              </li>
+              <li><router-link to="configurations">Settings</router-link></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a id="greetings"><span v-if="configurations.name"> Hi {{configurations.name}}!</span> <i class="glyphicon glyphicon-flash"></i> {{getPoints}}</a></li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
-    <router-view></router-view>
+      </nav>
+      <router-view></router-view>
+    </div>
+    <hr>
+    <footer>
+          <p>© 2017 <a href="http://winnercrespo.com">Winner Crespo</a></p>
+          <p>The code can be found on <a href="https://github.com/wistcc/chessTrainer">GitHub</a></p>
+    </footer>  
   </div>
 </template>
 
@@ -84,5 +91,8 @@
   }
   #greetings:hover {
     color: #777;
+  }
+  footer {
+    text-align: center;
   }
 </style>

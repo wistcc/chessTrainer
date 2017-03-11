@@ -2,21 +2,21 @@
     <div class="row">
         <div class="col-md-12 infoDiv">        
             <div v-if="!isInCurrentKata" @click="goCurrentKata" class="alert alert-info text-center clickableDiv">
-                <i class="glyphicon glyphicon-info-sign"></i> Keep on tack, go to your current Kata
+                <i class="glyphicon glyphicon-info-sign"></i> ¡Keep on tack, go to your current Kata!
             </div>
             <router-link class="btn btn-default" :to="{ name: 'kataList', query: {levelIndex: levelIndex}}"><i class="glyphicon glyphicon-menu-left"></i> Back to list</router-link>
             
             <div class="nextKataDiv text-center" v-if="nextKata">
                 <div>
-                    <h2>Congratulations you have finished this kata!</h2>
-                    <button class="btn btn-success" @click="goNextKata">Go to the next Kata</button>
+                    <h2>¡Congratulations you have finished this kata!</h2>
+                    <button class="btn btn-success" @click="goNextKata">Go to the next Kata <i class="glyphicon glyphicon-menu-right"></i></button>
                 </div>
             </div>
 
             <div class="nextLevelDiv text-center" v-if="nextLevel">
                 <div>
-                    <h2>Congratulations you have finished this level!</h2>
-                    <button class="btn btn-success" @click="goNextLevel">Go to the next level</button>
+                    <h2>¡Congratulations you have finished this level!</h2>
+                    <button class="btn btn-success" @click="goNextLevel">Go to the next level <i class="glyphicon glyphicon-menu-right"></i></button>
                 </div>
             </div>
 
