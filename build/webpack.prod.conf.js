@@ -80,6 +80,12 @@ const webpackConfig = merge(baseWebpackConfig, {
           to: 'img/'
         }
       ]),
+      new CopyWebpackPlugin([
+        { 
+          from: 'src/assets/',
+          to: 'assets/'
+        }
+      ]),
       new webpack.ProvidePlugin({
         $: "jquery",
         jQuery: "jquery"

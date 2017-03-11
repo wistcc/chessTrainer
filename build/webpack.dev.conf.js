@@ -38,6 +38,12 @@ module.exports = merge(baseWebpackConfig, {
       }),
       new CopyWebpackPlugin([
         { 
+          from: 'src/assets/',
+          to: 'assets/'
+        }
+      ]),
+      new CopyWebpackPlugin([
+        { 
           from: 'node_modules/chessboardjs/www/img/',
           to: 'img/'
         }
