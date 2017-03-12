@@ -34,7 +34,7 @@
               <li><router-link to="configurations">Settings</router-link></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a id="greetings"><span v-if="configurations.name"> Hi {{configurations.name}}!</span> <i class="glyphicon glyphicon-flash"></i> {{getPoints}}</a></li>
+                <li><a id="greetings"><span v-if="configurations.name"> Hi {{configurations.name}}!</span> <span title="Chess points"><i class="glyphicon glyphicon-flash"></i> {{getPoints}}</span></a></li>
             </ul>
           </div>
         </div>
