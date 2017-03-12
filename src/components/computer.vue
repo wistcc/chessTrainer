@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" v-model="blindfoldMode" @click="updateBoard"> Play blindfold?
+                    <input type="checkbox" v-model="blindfoldMode" @click="updateBoard"> Play in blindfold mode?
                 </label>
             </div>
         </div>
@@ -59,6 +59,7 @@
         methods: {
             updateBoard(){
                 if(!this.blindfoldMode) this.getCurrentBoard.boardObject.position(this.getCurrentGame.fen());
+                this.pgn = '';
             },
             move(){
                 var move = this.getCurrentGame.move(this.nextMove);
@@ -73,8 +74,6 @@
                 this.nextMove = '';
 
                 chessTainerHelper.updateStatus.call(this, !this.blindfoldMode);
-
-                this.pgn = '';
 
                 // make random legal move for black
                 window.setTimeout(this.makeRandomMove, 250);
