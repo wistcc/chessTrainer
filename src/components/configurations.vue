@@ -47,6 +47,11 @@
                 </div>
             </form>
         </div>
+        <div class="col-md-12">
+            <div class="alert alert-warning text-center clickableDiv">
+                <i class="glyphicon glyphicon-info-sign"></i> All data of this site is currently being saved on your browser. If the cache is deleted, the data would be deleted too.
+            </div>
+        </div>
     </div>
 </template>
 
