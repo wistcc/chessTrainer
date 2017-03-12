@@ -4,7 +4,7 @@ let onSnapEnd = function () {
     this.getCurrentBoard.boardObject.position(this.getCurrentGame.fen());
 }
 
-let updateStatus = function () {
+let updateStatus = function (updatePgn = true) {
     var status = '';
 
     var moveColor = 'White';
@@ -34,7 +34,7 @@ let updateStatus = function () {
 
     //statusEl.html(status);
     this.status = status;
-    this.pgn = this.getCurrentGame.pgn();
+    if(updatePgn) this.pgn = this.getCurrentGame.pgn();
 }
 
 

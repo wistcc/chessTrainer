@@ -1,10 +1,25 @@
 <template>
     <div>
-        <div class="col-md-6">
+        <div v-if="illegalMove" class="alert alert-danger text-center clickableDiv">
+            <i class="glyphicon glyphicon-info-sign"></i> Illegal move.
+        </div>
+        <div class="col-md-12">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" v-model="blindfoldMode" @click="updateBoard"> Play blindfold?
+                </label>
+            </div>
+        </div>
+        <div class="col-md-6" v-show="!blindfoldMode">
             <div id="computerBoard" style="width: 400px"></div>
         </div>
+        <div id="blindfold" v-show="blindfoldMode" class="col-md-6">
+            <p v-if="lastMove"><b>Oponent last move: {{lastMove}}</b></p>
+            <input class="form-control" placeholder="Type your move" type="text" v-model="nextMove"/> </br>
+            <button class="btn btn-info form-control" @click="move">Move piece</button> </br>
+        </div>
         <div class="col-md-6">
-            <historyTable :status="status" title="Playing versus computer" :pgn="pgn" :playingWithComputer="true" :showUndoMove="true"></historyTable>
+            <historyTable :status="status" title="Playing versus computer" :pgn="pgn" :playingWithComputer="true" :showUndoMove="!blindfoldMode"></historyTable>
         </div>
     </div>
 </template>
@@ -23,7 +38,11 @@
             return {
                 status: '',
                 pgn: '',
-                squareToHighlight: ''
+                squareToHighlight: '',
+                nextMove: '',
+                lastMove: '',
+                illegalMove: false,
+                blindfoldMode: false
             }
         },
         computed: {
@@ -38,6 +57,28 @@
             }
         },
         methods: {
+            updateBoard(){
+                if(!this.blindfoldMode) this.getCurrentBoard.boardObject.position(this.getCurrentGame.fen());
+            },
+            move(){
+                var move = this.getCurrentGame.move(this.nextMove);
+
+                // illegal move
+                if (move === null){
+                    this.illegalMove = true;
+                    return;
+                }
+                
+                if(this.illegalMove) this.illegalMove = false;
+                this.nextMove = '';
+
+                chessTainerHelper.updateStatus.call(this, !this.blindfoldMode);
+
+                this.pgn = '';
+
+                // make random legal move for black
+                window.setTimeout(this.makeRandomMove, 250);
+            },
             onDragStart(source, piece, position, orientation) {
                 // do not pick up pieces if the game is over
                 // only pick up pieces for White
@@ -57,7 +98,8 @@
                 var randomIndex = Math.floor(Math.random() * possibleMoves.length);
                 var move = possibleMoves[randomIndex];
                 this.getCurrentGame.move(move.san);
-                this.getCurrentBoard.boardObject.position(this.getCurrentGame.fen());
+                if(!this.blindfoldMode) this.getCurrentBoard.boardObject.position(this.getCurrentGame.fen());
+                this.lastMove = move.san;
                 
                 if(this.getConfigurations.highlightPiece) {
                     // highlight black's move
@@ -66,7 +108,7 @@
                     this.squareToHighlight = move.to;
                 }                
 
-                chessTainerHelper.updateStatus.call(this);
+                chessTainerHelper.updateStatus.call(this, !this.blindfoldMode);
             },
             onDrop(source, target) {
                 if(this.getConfigurations.highlightLegalMoves) chessTainerHelper.removeGreySquares(this.getCurrentBoard.boardId);
@@ -80,7 +122,7 @@
 
                 // illegal move
                 if (move === null) return 'snapback';
-                chessTainerHelper.updateStatus.call(this);
+                chessTainerHelper.updateStatus.call(this, !this.blindfoldMode);
 
                 if(this.getConfigurations.highlightPiece) {
                     // highlight white's move
@@ -129,8 +171,14 @@
             }
 
             this.$store.dispatch('updateCurrentBoard', currentBoard);
-            chessTainerHelper.updateStatus.call(this);
+            chessTainerHelper.updateStatus.call(this, !this.blindfoldMode);
         }
     }
 
 </script>
+
+<style>
+    #blindfold {
+        margin-top: 30px;
+    }
+</style>

@@ -60,7 +60,7 @@
                 // illegal move
                 if (move === null) return 'snapback';
 
-                chessTainerHelper.updateStatus.call(this);
+                chessTainerHelper.updateStatus.call(this, blindfoldMode);
 
                 if(this.getConfigurations.highlightPiece) {
                     if(this.getCurrentGame.turn() === 'w'){
@@ -113,7 +113,7 @@
             }
 
             this.$store.dispatch('updateCurrentBoard', currentBoard);
-            chessTainerHelper.updateStatus.call(this);
+            chessTainerHelper.updateStatus.call(this, blindfoldMode);
         }
     }
 
