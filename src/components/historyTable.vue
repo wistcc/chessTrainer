@@ -3,6 +3,8 @@
         <div class="row">
             <h3 class="text-primary">{{title}}</h3>
             <h4>{{description}}</h4>
+        </div>
+        <div class="row" v-if="status">        
             <h4>Status: {{status}}</h4>
         </div>
         <div class="row" v-if="showUndoMove">
