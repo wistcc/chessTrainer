@@ -4,35 +4,35 @@
             "name": "Beginner",
             "katas": [
                 {
-                    "description": "Mate in 1.",
+                    "description": "White mates in 1",
                     "fen": "rnbqkb1r/ppppp2p/8/4Ppp1/3Pn3/3B4/PPP2PPP/RNBQK1NR w KQkq f6 0 5",
                     "currentMove": 0,
                     "userMoves": ["Qh5#"],
                     "computerMoves": []
                 },     
                 {
-                    "description": "Mate in 1.",
+                    "description": "White mate in 1",
                     "fen": "6r1/p2bbkBp/2q1nP2/3p2p1/3P4/2P2Q2/PP1N1PPP/R4RK1 w - - 3 22",
                     "currentMove": 0,
                     "userMoves": ["Qh5#"],
                     "computerMoves": []
                 },
                 {
-                    "description": "Mate in 1.",
+                    "description": "White mates in 1",
                     "fen": "8/1r5p/R5p1/2p1kp2/1PP5/P3K2P/5PP1/8 w - - 0 37",
                     "currentMove": 0,
                     "userMoves": ["f4#"],
                     "computerMoves": []
                 },
                 {
-                    "description": "Mate in 2.",
+                    "description": "White mates in 2",
                     "fen": "5rk1/4qp2/2n2Q2/3R3p/1b2P3/5N1P/2B2PP1/6K1 w - - 1 27",
                     "currentMove": 0,
                     "userMoves": ["Rg5+", "Qg7#"],
                     "computerMoves": ["Kh7"]
                 },   
                 {
-                    "description": "Mates in 3.",
+                    "description": "White mates in 3",
                     "fen": "rnbN2k1/pp4pp/3b4/3p2B1/3P4/5Q2/PPP3PP/RN4K1 w - - 2 14",
                     "currentMove": 0,
                     "userMoves": ["Qf7+", "Qe8+", "Qxf8#"],
@@ -44,39 +44,39 @@
             "name": "Intermediate",
             "katas": [
                 {
-                    "description": "Mate in 1.",
-                    "fen": "rnbqkb1r/ppppp2p/8/4Ppp1/3Pn3/3B4/PPP2PPP/RNBQK1NR w KQkq f6 0 5",
+                    "description": "Black mates in 3",
+                    "fen": "4r2r/5pk1/p4n2/1p1q1b2/1P1P1Pp1/P3P1B1/8/2RBQRK1 b - - 4 37",
                     "currentMove": 0,
-                    "userMoves": ["Qh5#"],
-                    "computerMoves": []
+                    "userMoves": ["Qh1+", "Rh2+", "Qxh2#"],
+                    "computerMoves": ["Kf2", "Bxh2"]
                 },     
                 {
-                    "description": "Mate in 1.",
-                    "fen": "6r1/p2bbkBp/2q1nP2/3p2p1/3P4/2P2Q2/PP1N1PPP/R4RK1 w - - 3 22",
+                    "description": "White mates in 2",
+                    "fen": "7k/4Qb2/5RB1/6Pp/7P/8/8/6K1 w - - 3 55",
                     "currentMove": 0,
-                    "userMoves": ["Qh5#"],
-                    "computerMoves": []
+                    "userMoves": ["Rxf7", "Qf8#"],
+                    "computerMoves": ["Kg8"]
                 },
                 {
-                    "description": "Mate in 1.",
-                    "fen": "8/1r5p/R5p1/2p1kp2/1PP5/P3K2P/5PP1/8 w - - 0 37",
+                    "description": "Black mates in 4",
+                    "fen": "6k1/pp2p2p/3b2p1/7q/3p4/1P1P3P/P1N2rP1/1Q3R1K b - - 0 1",
                     "currentMove": 0,
-                    "userMoves": ["f4#"],
-                    "computerMoves": []
+                    "userMoves": ["Qe5", "Rh2+", "Qxg3#"],
+                    "computerMoves": ["g3", "Kg1"]
                 },
                 {
-                    "description": "Mate in 2.",
-                    "fen": "5rk1/4qp2/2n2Q2/3R3p/1b2P3/5N1P/2B2PP1/6K1 w - - 1 27",
+                    "description": "Black mates in 2",
+                    "fen": "1k6/ppb3pp/2prbn2/1P6/P6Q/2P1Pp2/5PqP/R1B1KR2 b - - 3 27",
                     "currentMove": 0,
-                    "userMoves": ["Rg5+", "Qg7#"],
-                    "computerMoves": ["Kh7"]
+                    "userMoves": ["Qxf1+", "Rd1#"],
+                    "computerMoves": ["Kxf1"]
                 },   
                 {
-                    "description": "Mates in 3.",
-                    "fen": "rnbN2k1/pp4pp/3b4/3p2B1/3P4/5Q2/PPP3PP/RN4K1 w - - 2 14",
+                    "description": "Black mates in 2",
+                    "fen": "r1b2rk1/pp3pp1/2pb3p/q6Q/1n1p4/2PP1B2/1P1B1PPP/1K1R3R b - - 0 20",
                     "currentMove": 0,
-                    "userMoves": ["Qf7+", "Qe8+", "Qxf8#"],
-                    "computerMoves": ["Kh8", "Bf8"]
+                    "userMoves": ["Qa2+", "Qa1#"],
+                    "computerMoves": ["Kc1"]
                 }
             ]
         },
@@ -84,39 +84,39 @@
             "name": "Advanced",
             "katas": [
                 {
-                    "description": "Mate in 1.",
-                    "fen": "rnbqkb1r/ppppp2p/8/4Ppp1/3Pn3/3B4/PPP2PPP/RNBQK1NR w KQkq f6 0 5",
+                    "description": "White mates in 1",
+                    "fen": "8/8/2P1Q3/1q2b1pk/7p/6P1/r4P1P/3R1RK1 w - - 3 37",
                     "currentMove": 0,
-                    "userMoves": ["Qh5#"],
+                    "userMoves": ["g4#"],
                     "computerMoves": []
                 },     
                 {
-                    "description": "Mate in 1.",
-                    "fen": "6r1/p2bbkBp/2q1nP2/3p2p1/3P4/2P2Q2/PP1N1PPP/R4RK1 w - - 3 22",
+                    "description": "White mates in 2",
+                    "fen": "r7/pp1b1pqp/1kpQ1b2/8/2B1P3/2N2P2/PPP3PP/2KR3R w - - 1 17",
                     "currentMove": 0,
-                    "userMoves": ["Qh5#"],
+                    "userMoves": ["Nd5+", "Qb4#"],
+                    "computerMoves": ["Ka5"]
+                },
+                {
+                    "description": "Black mates in 1",
+                    "fen": "1R3r1k/p5pp/2pQ4/3p2q1/8/4P2P/2P2rP1/6K1 b - - 1 25",
+                    "currentMove": 0,
+                    "userMoves": ["Qxg2#"],
                     "computerMoves": []
                 },
                 {
-                    "description": "Mate in 1.",
-                    "fen": "8/1r5p/R5p1/2p1kp2/1PP5/P3K2P/5PP1/8 w - - 0 37",
+                    "description": "Black mates in 2",
+                    "fen": "8/4n1k1/8/4pp2/2Qb4/5KP1/7q/5R2 b - - 1 53",
                     "currentMove": 0,
-                    "userMoves": ["f4#"],
-                    "computerMoves": []
-                },
-                {
-                    "description": "Mate in 2.",
-                    "fen": "5rk1/4qp2/2n2Q2/3R3p/1b2P3/5N1P/2B2PP1/6K1 w - - 1 27",
-                    "currentMove": 0,
-                    "userMoves": ["Rg5+", "Qg7#"],
-                    "computerMoves": ["Kh7"]
+                    "userMoves": ["e4+", "Qh6#"],
+                    "computerMoves": ["Kf4"]
                 },   
                 {
-                    "description": "Mates in 3.",
-                    "fen": "rnbN2k1/pp4pp/3b4/3p2B1/3P4/5Q2/PPP3PP/RN4K1 w - - 2 14",
+                    "description": "White mates in 3",
+                    "fen": "r3r1k1/pp4bp/3p1np1/q2PpbB1/2Pn3N/2N5/PP1QBPP1/2KR3R b - - 2 15",
                     "currentMove": 0,
-                    "userMoves": ["Qf7+", "Qe8+", "Qxf8#"],
-                    "computerMoves": ["Kh8", "Bf8"]
+                    "userMoves": ["Nb3+", "Qa1+", "Qxb1#"],
+                    "computerMoves": ["axb3", "Nb1"]
                 }
             ]
         }
